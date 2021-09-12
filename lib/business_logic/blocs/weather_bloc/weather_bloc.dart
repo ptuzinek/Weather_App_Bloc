@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';
@@ -31,6 +32,17 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     } catch (e) {
       yield WeatherFetchFailure(error: e.toString());
     }
+  }
+
+  @override
+  Stream<Transition<WeatherEvent, WeatherState>> transformEvents(
+    Stream<WeatherEvent> events,
+    TransitionFunction<WeatherEvent, WeatherState> transitionFn,
+  ) {
+    return super.transformEvents(
+      events.debounceTime(const Duration(milliseconds: 900)),
+      transitionFn,
+    );
   }
 
   @override
