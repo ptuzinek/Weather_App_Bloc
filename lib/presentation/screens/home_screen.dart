@@ -34,10 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text('Weather in ${state.weather.cityName}'),
-                    Text('Temperature: ${state.weather.temperature}'),
-                    Text('Cloudiness: ${state.weather.cloudiness}'),
-                    Text('Pressure: ${state.weather.pressure}'),
-                    Text('Wind Speed: ${state.weather.windSpeed}'),
+                    Text(
+                        'Temperature: ${state.weather.calculateCelsius(state.weather.temperature)} °C'),
+                    Text('Cloudiness: ${state.weather.cloudiness} %'),
+                    Text('Pressure: ${state.weather.pressure} hPa'),
+                    Text('Wind Speed: ${state.weather.windSpeed} m/s'),
+                    Text('Description: ${state.weather.weatherDescription}'),
                     MaterialButton(
                       onPressed: () => Navigator.pushNamed(context, '/search'),
                       child: Text('Search Cities'),
