@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_app_bloc/data/constants/api_keys.dart' as ApiKeys;
 
@@ -21,5 +22,10 @@ class OpenWeatherProvider {
     } else {
       print(response.statusCode);
     }
+  }
+
+  Future<Position> getLocation() async {
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.medium);
   }
 }

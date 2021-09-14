@@ -1,14 +1,16 @@
 import 'dart:convert';
 
-class Weather {
-  String cityName;
-  dynamic temperature;
-  int conditionScore;
-  dynamic windSpeed;
-  int cloudiness;
-  int pressure;
-  String weatherIconId;
-  String weatherDescription;
+import 'package:equatable/equatable.dart';
+
+class Weather extends Equatable {
+  final String cityName;
+  final dynamic temperature;
+  final int conditionScore;
+  final dynamic windSpeed;
+  final int cloudiness;
+  final int pressure;
+  final String weatherIconId;
+  final String weatherDescription;
 
   Weather({
     required this.cityName,
@@ -63,4 +65,16 @@ class Weather {
 
   String calculateFahrenheit(double temperature) =>
       num.parse((1.8 * (temperature - 273) + 32).toStringAsFixed(1)).toString();
+
+  @override
+  List<Object?> get props => [
+        cityName,
+        temperature,
+        conditionScore,
+        windSpeed,
+        cloudiness,
+        pressure,
+        weatherIconId,
+        weatherDescription,
+      ];
 }

@@ -1,8 +1,8 @@
 import 'package:weather_app_bloc/data/constants/city_names.dart';
-import 'package:weather_app_bloc/data/models/city.dart';
+import 'package:weather_app_bloc/data/models/city_suggestion.dart';
 
 class CityService {
-  List<City> getSuggestions(String query) {
+  List<CitySuggestion> getSuggestions(String query) {
     List<String> queryResult = cityNames.where((city) {
       final cityLower = city.toLowerCase();
       final queryLower = query.toLowerCase();
@@ -20,7 +20,7 @@ class CityService {
       // 3 cities String
       // Create a list with City objects with set text properties to each
       // part of the word
-      List<City> cityListResult = [];
+      List<CitySuggestion> cityListResult = [];
       for (String word in queryResultSublist) {
         String textWithoutQuery =
             word.toLowerCase().replaceFirst(query.toLowerCase(), '--');
@@ -63,7 +63,8 @@ class CityService {
         // print('query: $query');
         // print('text3: $text3');
 
-        City city = City(text1: text1, text2: query, text3: text3);
+        CitySuggestion city =
+            CitySuggestion(text1: text1, text2: query, text3: text3);
         cityListResult.add(city);
       }
       return cityListResult;

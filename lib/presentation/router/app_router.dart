@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_bloc/presentation/screens/favorites_screen.dart';
 import 'package:weather_app_bloc/presentation/screens/home_screen.dart';
 import 'package:weather_app_bloc/presentation/screens/search_screen.dart';
 
@@ -10,6 +11,9 @@ class AppRouter {
 
       case '/search':
         return MaterialPageRoute(builder: (_) => SearchScreen());
+
+      case '/favorites':
+        return MaterialPageRoute(builder: (_) => FavoritesScreen());
 
       default:
         return MaterialPageRoute(builder: (_) => HomeScreen());

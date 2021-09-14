@@ -12,7 +12,8 @@ part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherRepository weatherRepository;
-  WeatherBloc({required this.weatherRepository}) : super(WeatherInitial());
+  WeatherBloc({required this.weatherRepository})
+      : super(WeatherFetchInProgress());
 
   @override
   Stream<WeatherState> mapEventToState(
@@ -20,6 +21,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async* {
     if (event is CityWeatherRequested) {
       yield* _mapCityWeatherRequestedtoState(event);
+    } else if (event is LocationWeatherRequested) {
+      yield* _mapLocationWeatherRequestedtoState(event);
     }
   }
 
@@ -28,6 +31,17 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     yield WeatherFetchInProgress();
     try {
       final weather = await weatherRepository.getCityWeather(event.cityName);
+      yield WeatherFetchSuccess(weather: weather);
+    } catch (e) {
+      yield WeatherFetchFailure(error: e.toString());
+    }
+  }
+
+  Stream<WeatherState> _mapLocationWeatherRequestedtoState(
+      LocationWeatherRequested event) async* {
+    yield WeatherFetchInProgress();
+    try {
+      final weather = await weatherRepository.getLocationWeather();
       yield WeatherFetchSuccess(weather: weather);
     } catch (e) {
       yield WeatherFetchFailure(error: e.toString());
