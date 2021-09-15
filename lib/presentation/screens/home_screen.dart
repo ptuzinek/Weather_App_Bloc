@@ -60,25 +60,34 @@ class _HomeScreenState extends State<HomeScreen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 180,
-                collapsedHeight: 80,
+                expandedHeight: 200,
+                collapsedHeight: 90,
                 floating: true,
                 pinned: true,
                 snap: false,
 
                 flexibleSpace: BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
+                    // print('System Padding:');
+                    // print(
+                    //     'viewInsets.top ${MediaQuery.of(context).viewInsets.top}');
+                    // print(
+                    //     'viewPadding.top ${MediaQuery.of(context).viewPadding.top}');
+
                     if (state is WeatherFetchSuccess) {
                       return FlexibleSpaceBar(
                         titlePadding: EdgeInsets.only(top: 30),
                         stretchModes: const <StretchMode>[
-                          StretchMode.fadeTitle,
                           StretchMode.blurBackground,
                           StretchMode.zoomBackground
                         ],
                         centerTitle: true,
                         title: Align(
-                            alignment: Alignment(0, 0.2),
+                            alignment:
+                                // Control the top padding when there is a notch or not
+                                MediaQuery.of(context).viewPadding.top > 30
+                                    ? Alignment(0, 0.2)
+                                    : Alignment(0, 0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
@@ -97,9 +106,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Align(
                               alignment: Alignment(0, 0.7),
                               child: Text(
-                                state.weather.calculateCelsius(
-                                    state.weather.temperature),
-                                style: TextStyle(fontSize: 35),
+                                '${state.weather.calculateCelsius(state.weather.temperature)}°',
+                                style: TextStyle(fontSize: 55),
                               ),
                             )),
                       );
