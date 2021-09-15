@@ -61,7 +61,7 @@ class Weather extends Equatable {
   }
 
   String calculateCelsius(dynamic temperature) =>
-      num.parse((temperature - 273).toStringAsFixed(1)).toString();
+      num.parse((temperature - 273).toStringAsFixed(0)).toString();
 
   String calculateFahrenheit(double temperature) =>
       num.parse((1.8 * (temperature - 273) + 32).toStringAsFixed(1)).toString();
