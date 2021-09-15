@@ -36,6 +36,19 @@ class Weather extends Equatable {
     };
   }
 
+  factory Weather.fromMapBloc(Map<String, dynamic> map) {
+    return Weather(
+      cityName: map['cityName'],
+      temperature: map['temperature'],
+      conditionScore: map['conditionScore'],
+      windSpeed: map['windSpeed'],
+      cloudiness: map['cloudiness'],
+      pressure: map['pressure'],
+      weatherIconId: map['weatherIconId'],
+      weatherDescription: map['weatherDescription'],
+    );
+  }
+
   factory Weather.fromMap(Map<String, dynamic> map) {
     return Weather(
       cityName: map['name'],

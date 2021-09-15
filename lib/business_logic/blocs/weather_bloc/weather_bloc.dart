@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
@@ -10,7 +12,7 @@ import 'package:rxdart/rxdart.dart';
 part 'weather_event.dart';
 part 'weather_state.dart';
 
-class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
+class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
   final WeatherRepository weatherRepository;
   WeatherBloc({required this.weatherRepository})
       : super(WeatherFetchInProgress());
@@ -23,6 +25,8 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
       yield* _mapCityWeatherRequestedtoState(event);
     } else if (event is LocationWeatherRequested) {
       yield* _mapLocationWeatherRequestedtoState(event);
+    } else if (event is FavoriteCityWeatherRequested) {
+      yield* _mapFavoriteCityWeatherRequestedToState(event);
     }
   }
 
@@ -39,13 +43,18 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
   Stream<WeatherState> _mapLocationWeatherRequestedtoState(
       LocationWeatherRequested event) async* {
-    yield WeatherFetchInProgress();
+    // yield WeatherFetchInProgress();
     try {
       final weather = await weatherRepository.getLocationWeather();
       yield WeatherFetchSuccess(weather: weather);
     } catch (e) {
       yield WeatherFetchFailure(error: e.toString());
     }
+  }
+
+  Stream<WeatherState> _mapFavoriteCityWeatherRequestedToState(
+      FavoriteCityWeatherRequested event) async* {
+    yield WeatherFetchSuccess(weather: event.weather);
   }
 
   @override
@@ -63,5 +72,31 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   void onTransition(Transition<WeatherEvent, WeatherState> transition) {
     print(transition);
     super.onTransition(transition);
+  }
+
+  @override
+  WeatherState? fromJson(Map<String, dynamic> json) {
+    print('JSON:');
+    print(json);
+    try {
+      if (json.isNotEmpty) {
+        final weather = Weather.fromMapBloc(json);
+        print('Weather State LOADED');
+
+        return WeatherFetchSuccess(weather: weather);
+      }
+    } catch (e) {
+      return WeatherFetchFailure(error: e.toString());
+    }
+  }
+
+  @override
+  Map<String, dynamic>? toJson(WeatherState state) {
+    if (state is WeatherFetchSuccess) {
+      print('Weather State SAVED');
+      return state.weather.toMap();
+    } else {
+      return null;
+    }
   }
 }

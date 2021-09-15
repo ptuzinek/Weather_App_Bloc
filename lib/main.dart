@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/data_providers/favorite_cities_provider.dart';
@@ -9,7 +11,13 @@ import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 import 'package:weather_app_bloc/presentation/router/app_router.dart';
 import 'package:weather_app_bloc/presentation/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
   final OpenWeatherProvider openWeatherProvider = OpenWeatherProvider();
   final FavoriteCitiesDatabase favoriteCitiesDatabase =
       FavoriteCitiesDatabase();
