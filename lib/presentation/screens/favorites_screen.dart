@@ -45,11 +45,13 @@ class FavoritesScreen extends StatelessWidget {
                     child: ListTile(
                       tileColor: Color(0xFF464660),
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                      trailing: Text(
-                        ConditionEmojiProvider().getWeatherEmoji(
-                            state.favoriteCitiesWeather[index].conditionScore),
-                        style: TextStyle(fontSize: 30),
-                      ),
+                      trailing: Image.asset(
+                          'images/weather_icons/${state.favoriteCitiesWeather[index].weatherIconId == '03d' ? '02d' : state.favoriteCitiesWeather[index].weatherIconId}.png'),
+                      // Text(
+                      //   ConditionEmojiProvider.getWeatherEmoji(
+                      //       state.favoriteCitiesWeather[index].conditionScore),
+                      //   style: TextStyle(fontSize: 30),
+                      // ),
                       title: Text(state.favoriteCitiesWeather[index].cityName,
                           style: TextStyle(color: Colors.white)),
                       subtitle: Text(
@@ -57,9 +59,8 @@ class FavoritesScreen extends StatelessWidget {
                           style: TextStyle(color: Colors.grey[300])),
                       onTap: () {
                         BlocProvider.of<WeatherBloc>(context).add(
-                            CityWeatherRequested(
-                                cityName: state
-                                    .favoriteCitiesWeather[index].cityName));
+                            FavoriteCityWeatherRequested(
+                                weather: state.favoriteCitiesWeather[index]));
                         Navigator.pop(context);
                       },
                     ),

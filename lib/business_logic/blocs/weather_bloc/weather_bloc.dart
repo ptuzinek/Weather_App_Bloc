@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -32,7 +31,6 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
 
   Stream<WeatherState> _mapCityWeatherRequestedtoState(
       CityWeatherRequested event) async* {
-    yield WeatherFetchInProgress();
     try {
       final weather = await weatherRepository.getCityWeather(event.cityName);
       yield WeatherFetchSuccess(weather: weather);
@@ -43,7 +41,6 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
 
   Stream<WeatherState> _mapLocationWeatherRequestedtoState(
       LocationWeatherRequested event) async* {
-    // yield WeatherFetchInProgress();
     try {
       final weather = await weatherRepository.getLocationWeather();
       yield WeatherFetchSuccess(weather: weather);
@@ -69,6 +66,9 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
   }
 
   @override
+  String get id => 'weather';
+
+  @override
   void onTransition(Transition<WeatherEvent, WeatherState> transition) {
     print(transition);
     super.onTransition(transition);
@@ -82,6 +82,7 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
       if (json.isNotEmpty) {
         final weather = Weather.fromMapBloc(json);
         print('Weather State LOADED');
+        print(weather.weatherHourlyList.runtimeType);
 
         return WeatherFetchSuccess(weather: weather);
       }

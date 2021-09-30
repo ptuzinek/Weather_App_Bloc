@@ -10,7 +10,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => HomeScreen());
 
       case '/search':
-        return MaterialPageRoute(builder: (_) => SearchScreen());
+        return MaterialPageRoute(
+            fullscreenDialog: true, builder: (_) => SearchScreen());
 
       case '/favorites':
         return MaterialPageRoute(builder: (_) => FavoritesScreen());

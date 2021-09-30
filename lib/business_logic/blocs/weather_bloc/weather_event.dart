@@ -19,3 +19,12 @@ class LocationWeatherRequested extends WeatherEvent {
   @override
   List<Object> get props => [];
 }
+
+class FavoriteCityWeatherRequested extends WeatherEvent {
+  final Weather weather;
+
+  FavoriteCityWeatherRequested({required this.weather});
+
+  @override
+  List<Object> get props => [weather];
+}

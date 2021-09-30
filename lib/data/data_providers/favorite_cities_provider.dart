@@ -6,7 +6,7 @@ class FavoriteCitiesProvider {
   FavoriteCitiesProvider({required this.database});
 
   Future<List<String>> getFavoriteCitesList() async {
-    await Future.delayed(Duration(milliseconds: 300));
+    await Future.delayed(Duration(milliseconds: 500));
     final List<String> favoriteCitiesListFetched =
         await database.getFavoriteCities();
 

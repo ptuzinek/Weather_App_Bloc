@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app_bloc/data/data_providers/favorite_cities_provider.dart';
 import 'package:weather_app_bloc/data/data_providers/open_weather_provider.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
+import 'package:weather_app_bloc/data/models/weather_hourly.dart';
 
 class WeatherRepository {
   final OpenWeatherProvider weatherProvider;
@@ -26,12 +29,51 @@ class WeatherRepository {
     return weather;
   }
 
+  // Future<void> getLocationHourlyForcast(String cityName) async {}
+
+  // List of Weather objects, the first one is the current
+
   Future<Weather> getLocationWeather() async {
     final Position position = await weatherProvider.getLocation();
     final rawWeatherData = await weatherProvider.getRawLocationWeatherData(
         position.latitude, position.longitude);
 
-    final Weather weather = Weather.fromJson(rawWeatherData);
+    final Weather tempWeather = Weather.fromJson(rawWeatherData);
+
+    final String rawHourlyForcast = await weatherProvider
+        .getLocationHourlyForcast(position.latitude, position.longitude);
+
+    List<WeatherHourly> weatherHourlyList = [];
+    for (int index = 0; index < 24; index++) {
+      final WeatherHourly weatherHourly =
+          WeatherHourly.fromJson(rawHourlyForcast, index);
+
+      weatherHourlyList.add(weatherHourly);
+    }
+
+    // final WeatherHourly weatherHourly =
+    //     WeatherHourly.fromJson(rawHourlyForcast);
+
+    print('DATE:');
+    print(DateTime.fromMillisecondsSinceEpoch(
+            weatherHourlyList[0].timeStamp * 1000)
+        .hour);
+
+    print(DateTime.fromMillisecondsSinceEpoch((weatherHourlyList[0].timeStamp +
+                weatherHourlyList[0].timeZoneOffset) *
+            1000)
+        .toUtc()
+        .hour);
+    print(DateTime.fromMillisecondsSinceEpoch((weatherHourlyList[0].timeStamp +
+                weatherHourlyList[0].timeZoneOffset) *
+            1000)
+        .minute);
+
+    final Weather weather =
+        tempWeather.copyWith(weatherHourlyList: weatherHourlyList);
+
+    print('--------------------------------WEATHER:');
+    print(weather);
 
     return weather;
   }

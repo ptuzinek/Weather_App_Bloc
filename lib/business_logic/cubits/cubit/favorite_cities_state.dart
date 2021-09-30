@@ -13,7 +13,9 @@ class FavoriteCitiesFetchInProgress extends FavoriteCitiesState {}
 class FavoriteCitiesFetchSuccess extends FavoriteCitiesState {
   final List<Weather> favoriteCitiesWeather;
 
-  const FavoriteCitiesFetchSuccess({required this.favoriteCitiesWeather});
+  const FavoriteCitiesFetchSuccess({
+    required this.favoriteCitiesWeather,
+  });
 
   @override
   List<Object> get props => [favoriteCitiesWeather];
@@ -26,6 +28,29 @@ class FavoriteCitiesFetchSuccess extends FavoriteCitiesState {
           favoriteCitiesWeather ?? this.favoriteCitiesWeather,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'favoriteCitiesWeather':
+          favoriteCitiesWeather.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory FavoriteCitiesFetchSuccess.fromMap(Map<String, dynamic> map) {
+    return FavoriteCitiesFetchSuccess(
+      favoriteCitiesWeather: List<Weather>.from(
+          map['favoriteCitiesWeather']?.map((x) => Weather.fromMapBloc(x))),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory FavoriteCitiesFetchSuccess.fromJson(String source) =>
+      FavoriteCitiesFetchSuccess.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'FavoriteCitiesFetchSuccess(favoriteCitiesWeather: $favoriteCitiesWeather)';
 }
 
 class FavoriteCitiesFetchFailure extends FavoriteCitiesState {

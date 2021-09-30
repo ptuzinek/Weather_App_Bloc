@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
+import 'package:weather_app_bloc/presentation/widgets/slider.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
@@ -24,8 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       top: false,
       child: Scaffold(
-        backgroundColor: Color(0xFF464660),
+        backgroundColor: Color(0xFF889EAF),
         bottomNavigationBar: BottomAppBar(
+          color: Color(0xFF334756),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -60,104 +62,62 @@ class _HomeScreenState extends State<HomeScreen> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 200,
+                backgroundColor: Color(0xFF334756), //Color(0xFF6E85B2),
+                expandedHeight: 205,
                 collapsedHeight: 90,
-                floating: true,
+                floating: false,
                 pinned: true,
                 snap: false,
-
                 flexibleSpace: BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
-                    // print('System Padding:');
-                    // print(
-                    //     'viewInsets.top ${MediaQuery.of(context).viewInsets.top}');
-                    // print(
-                    //     'viewPadding.top ${MediaQuery.of(context).viewPadding.top}');
-
                     if (state is WeatherFetchSuccess) {
                       return FlexibleSpaceBar(
                         titlePadding: EdgeInsets.only(top: 30),
-                        stretchModes: const <StretchMode>[
-                          StretchMode.blurBackground,
-                          StretchMode.zoomBackground
-                        ],
+                        collapseMode: CollapseMode.parallax,
                         centerTitle: true,
                         title: Align(
-                            alignment:
-                                // Control the top padding when there is a notch or not
-                                MediaQuery.of(context).viewPadding.top > 30
-                                    ? Alignment(0, 0.2)
-                                    : Alignment(0, 0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(state.weather.cityName),
-                                SizedBox(height: 3),
-                                Text(
-                                  state.weather.weatherDescription,
-                                  style: TextStyle(
-                                      fontSize: 11, color: Colors.white70),
-                                )
-                              ],
-                            )),
+                          alignment:
+                              // Control the top padding when there is a notch or not
+                              MediaQuery.of(context).viewPadding.top > 30
+                                  ? Alignment(0, 0.2)
+                                  : Alignment(0, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(state.weather.cityName),
+                              SizedBox(height: 3),
+                              Text(
+                                state.weather.weatherDescription,
+                                style: TextStyle(
+                                    fontSize: 11, color: Colors.white70),
+                              )
+                            ],
+                          ),
+                        ),
                         background: Align(
                             alignment: Alignment.center,
                             child: Align(
                               alignment: Alignment(0, 0.7),
-                              child: Text(
-                                '${state.weather.calculateCelsius(state.weather.temperature)}°',
-                                style: TextStyle(fontSize: 55),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    '${state.weather.calculateCelsius(state.weather.temperature)}°',
+                                    style: TextStyle(fontSize: 55),
+                                  ),
+                                  Image.asset(
+                                      'images/weather_icons/${state.weather.weatherIconId == '03d' ? '02d' : state.weather.weatherIconId}.png'),
+                                ],
                               ),
                             )),
                       );
                     } else {
-                      return Text('Something went wrong');
+                      return Center(child: Text('Something went wrong'));
                     }
                   },
                 ),
-                // title: Text('Weight Tracker'),
-                // floating: false,
-                // snap: false,
                 forceElevated: innerBoxIsScrolled,
-                // bottom: AppBar(
-                //   toolbarHeight: 55,
-                //   elevation: 0,
-                //   // brightness:
-                //   //     Brightness.dark, // this makes device status bar text color white
-                //   backgroundColor: Color(0xFF464660),
-                //   title: BlocBuilder<WeatherBloc, WeatherState>(
-                //     builder: (context, state) {
-                //       if (state is WeatherFetchSuccess) {
-                //         return Text(state.weather.cityName);
-                //       } else {
-                //         return Text('');
-                //       }
-                //     },
-                //   ),
-                //   leading: IconButton(
-                //     onPressed: () {
-                //       Navigator.pushNamed(context, '/search');
-                //     },
-                //     icon: Icon(
-                //       Icons.search,
-                //       color: Colors.white70,
-                //     ),
-                //   ),
-                //   actions: [
-                //     IconButton(
-                //       onPressed: () {
-                //         BlocProvider.of<FavoriteCitiesCubit>(context)
-                //             .getFavoriteCitiesList();
-                //         Navigator.pushNamed(context, '/favorites');
-                //       },
-                //       icon: Icon(
-                //         Icons.list,
-                //         color: Colors.white70,
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ),
             ];
           },
@@ -169,10 +129,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     if (state is WeatherFetchInProgress) {
                       return CircularProgressIndicator();
                     } else if (state is WeatherFetchSuccess) {
+                      print('state.weather.weatherHourlyList-----------');
+
+                      print(state.weather.weatherHourlyList);
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
+                          state.weather.weatherHourlyList.isNotEmpty
+                              ? WeatherSlider(
+                                  weatherHourlyList:
+                                      state.weather.weatherHourlyList,
+                                )
+                              : Column(
+                                  children: [
+                                    Container(
+                                      height: 0.5,
+                                      width: double.infinity,
+                                      color: Colors.white,
+                                    ),
+                                    Container(height: 105),
+                                    Container(
+                                      height: 0.5,
+                                      width: double.infinity,
+                                      color: Colors.white,
+                                    ),
+                                  ],
+                                ),
+
+                          // Text(
+                          //     'Weather in ${state.weather.weatherHourlyList[0].temperature}'),
+                          SizedBox(
+                            height: 200,
+                          ),
                           Text('Weather in ${state.weather.cityName}'),
                           SizedBox(
                             height: 200,

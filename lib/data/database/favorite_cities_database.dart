@@ -1,8 +1,8 @@
 class FavoriteCitiesDatabase {
-  List<String> _favoriteCities = ['Warsaw', 'New York', 'London', 'Tokyo'];
+  List<String> _favoriteCities = ['Warsaw', 'New York'];
 
   Future<List<String>> getFavoriteCities() async {
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(Duration(milliseconds: 500));
     return _favoriteCities;
   }
 
