@@ -14,12 +14,12 @@ class WeatherSlider extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            height: 0.5,
+            height: 0.3,
             width: double.infinity,
             color: Colors.white,
           ),
           SizedBox(
-            height: 105,
+            height: 120,
             child: ListView.builder(
               itemCount: 24,
               physics: ClampingScrollPhysics(),
@@ -38,7 +38,7 @@ class WeatherSlider extends StatelessWidget {
             ),
           ),
           Container(
-            height: 0.5,
+            height: 0.3,
             color: Colors.white,
           ),
         ],
