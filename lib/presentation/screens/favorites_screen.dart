@@ -68,7 +68,17 @@ class FavoritesScreen extends StatelessWidget {
               );
             } else {
               return Center(
-                child: Text('No state case'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Loading Favorite Cities..'),
+                    SizedBox(height: 50),
+                    CircularProgressIndicator(
+                      color: Colors.grey[300],
+                    )
+                  ],
+                ),
               );
             }
           },
