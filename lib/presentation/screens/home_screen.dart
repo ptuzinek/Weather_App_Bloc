@@ -123,7 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             )),
                       );
                     } else {
-                      return Center(child: Text('Something went wrong'));
+                      return Center(
+                          child: Text('Getting Localisation Weather...'));
                     }
                   },
                 ),
@@ -198,7 +199,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     );
                   } else {
-                    return Text('Something went wrong');
+                    return CircularProgressIndicator(
+                      color: Colors.grey[850],
+                    );
                   }
                 },
               ),
