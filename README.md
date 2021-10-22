@@ -1,16 +1,23 @@
-# weather_app_bloc
+# Weather App ⛅
+**HomeScreen is not fully completed. Also database is not implemented - there is a mock instead for now.*
 
-A new Flutter project.
+This is a weather application based on the ios weather app. Great design makes this application look and feel great. User can firstly checkout the weather for his current location with the forcast up to 24 hours. Then there is an option to find any city in the world and display its current weather and its forecast. Every city that was checked out by the user is saved into the memory that is displayed as a list on one of the screens. List of cities is provided with basic current weather information. User can choose one of the cities from the list to check its current weather with more information, and its weather forecast.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+https://user-images.githubusercontent.com/55239853/138523722-54ed2ca8-48b5-4ef1-a8a7-03dccf7f680b.mp4
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+# Features ⚙️ 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Beautiful UI,
+- The application uses Bloc State managment,
+- Use of a Hydrated Bloc for loading the last checked out cities in order to not show the loading screen,
+- Autocomplete in the textfield with highlighted letters that match the query and city name,
+- Option to remove a city from the saved list,
+- Weather is fethed mostly in the background, so that user isn't stuck at the loading screen,
+- Connecting to the external API,
+- Working with JSON rensponse.
+
+
+
+
