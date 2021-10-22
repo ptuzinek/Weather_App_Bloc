@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:geolocator/geolocator.dart';
 import 'package:weather_app_bloc/data/data_providers/favorite_cities_provider.dart';
 import 'package:weather_app_bloc/data/data_providers/open_weather_provider.dart';
@@ -24,12 +22,24 @@ class WeatherRepository {
     print('JSON body:');
     print(rawWeatherData);
 
-    final Weather weather = Weather.fromJson(rawWeatherData);
+    final Weather cityWeather = Weather.fromJson(rawWeatherData);
+
+    final String rawHourlyForcast = await weatherProvider
+        .getLocationHourlyForcast(cityWeather.lat, cityWeather.lon);
+
+    List<WeatherHourly> weatherHourlyList = [];
+    for (int index = 0; index < 24; index++) {
+      final WeatherHourly weatherHourly =
+          WeatherHourly.fromJson(rawHourlyForcast, index);
+
+      weatherHourlyList.add(weatherHourly);
+    }
+
+    final Weather weather =
+        cityWeather.copyWith(weatherHourlyList: weatherHourlyList);
 
     return weather;
   }
-
-  // Future<void> getLocationHourlyForcast(String cityName) async {}
 
   // List of Weather objects, the first one is the current
 
@@ -50,24 +60,6 @@ class WeatherRepository {
 
       weatherHourlyList.add(weatherHourly);
     }
-
-    // final WeatherHourly weatherHourly =
-    //     WeatherHourly.fromJson(rawHourlyForcast);
-
-    print('DATE:');
-    print(DateTime.fromMillisecondsSinceEpoch(
-            weatherHourlyList[0].timeStamp * 1000)
-        .hour);
-
-    print(DateTime.fromMillisecondsSinceEpoch((weatherHourlyList[0].timeStamp +
-                weatherHourlyList[0].timeZoneOffset) *
-            1000)
-        .toUtc()
-        .hour);
-    print(DateTime.fromMillisecondsSinceEpoch((weatherHourlyList[0].timeStamp +
-                weatherHourlyList[0].timeZoneOffset) *
-            1000)
-        .minute);
 
     final Weather weather =
         tempWeather.copyWith(weatherHourlyList: weatherHourlyList);
