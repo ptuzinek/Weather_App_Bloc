@@ -26,6 +26,17 @@ class WeatherHourly extends Equatable {
     };
   }
 
+// For reading from device storage
+  factory WeatherHourly.fromMapBloc(Map<String, dynamic> map, int index) {
+    return WeatherHourly(
+      timeStamp: map['timeStamp'],
+      temperature: map['temperature'],
+      conditionScore: map['conditionScore'],
+      weatherIconId: map['weatherIconId'],
+      timeZoneOffset: map['timeZoneOffset'],
+    );
+  }
+
   factory WeatherHourly.fromMap(Map<String, dynamic> map, int index) {
     final int temperatureCelsius = num.parse(
             (map['hourly'][index]['temp'].toInt() - 273).toStringAsFixed(0))

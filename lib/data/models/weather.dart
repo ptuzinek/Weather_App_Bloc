@@ -60,8 +60,8 @@ class Weather extends Equatable {
       weatherIconId: map['weatherIconId'],
       weatherDescription: map['weatherDescription'],
       weatherHourlyList: (map['weatherHourlyList'] as List)
-          .map((e) => WeatherHourly.fromJson(
-              e, (map['weatherHourlyList'] as List).indexOf(e)))
+          .map((e) => WeatherHourly.fromMapBloc(
+              json.decode(e), (map['weatherHourlyList'] as List).indexOf(e)))
           .toList(),
     );
   }
