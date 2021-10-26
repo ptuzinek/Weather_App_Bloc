@@ -15,13 +15,13 @@ class HourWeatherBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
+      padding: const EdgeInsets.only(top: 15, bottom: 5, left: 12, right: 12),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(child: Text(hour.toString())),
           Padding(
-            padding: const EdgeInsets.only(top: 6, bottom: 6),
+            padding: const EdgeInsets.only(top: 3, bottom: 4),
             child: SizedBox(
               height: 50,
               width: 50,

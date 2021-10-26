@@ -76,7 +76,7 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
 
   @override
   WeatherState? fromJson(Map<String, dynamic> json) {
-    print('JSON:');
+    print('WeatherBloc JSON:');
     print(json);
     try {
       if (json.isNotEmpty) {

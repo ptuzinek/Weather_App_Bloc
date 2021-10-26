@@ -4,6 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:weather_app_bloc/data/models/weather_hourly.dart';
 
 class Weather extends Equatable {
+  final dynamic lat;
+  final dynamic lon;
   final String cityName;
   final dynamic temperature;
   final int conditionScore;
@@ -15,6 +17,8 @@ class Weather extends Equatable {
   final List<WeatherHourly> weatherHourlyList;
 
   Weather({
+    this.lat,
+    this.lon,
     required this.cityName,
     required this.temperature,
     required this.conditionScore,
@@ -28,6 +32,8 @@ class Weather extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
+      'lat': lat,
+      'lon': lon,
       'cityName': cityName,
       'temperature': temperature,
       'conditionScore': conditionScore,
@@ -43,6 +49,8 @@ class Weather extends Equatable {
 // For reading from device storage
   factory Weather.fromMapBloc(Map<String, dynamic> map) {
     return Weather(
+      lat: map['lat'],
+      lon: map['lon'],
       cityName: map['cityName'],
       temperature: map['temperature'],
       conditionScore: map['conditionScore'],
@@ -52,14 +60,16 @@ class Weather extends Equatable {
       weatherIconId: map['weatherIconId'],
       weatherDescription: map['weatherDescription'],
       weatherHourlyList: (map['weatherHourlyList'] as List)
-          .map((e) => WeatherHourly.fromJson(
-              e, (map['weatherHourlyList'] as List).indexOf(e)))
+          .map((e) => WeatherHourly.fromMapBloc(
+              json.decode(e), (map['weatherHourlyList'] as List).indexOf(e)))
           .toList(),
     );
   }
 
   factory Weather.fromMap(Map<String, dynamic> map) {
     return Weather(
+      lat: map['coord']['lat'],
+      lon: map['coord']['lon'],
       cityName: map['name'],
       temperature: map['main']['temp'],
       conditionScore: map['weather'][0]['id'],
@@ -80,7 +90,7 @@ class Weather extends Equatable {
 
   @override
   String toString() {
-    return 'Weather(cityName: $cityName, temperature: $temperature, conditionScore: $conditionScore, windSpeed: $windSpeed, cloudiness: $cloudiness, pressure: $pressure, weatherIconId: $weatherIconId, weatherDescription: $weatherDescription, weatherHourlyList: ${weatherHourlyList.length})';
+    return 'Weather(lat: $lat, lon: $lon, cityName: $cityName, temperature: $temperature, conditionScore: $conditionScore, windSpeed: $windSpeed, cloudiness: $cloudiness, pressure: $pressure, weatherIconId: $weatherIconId, weatherDescription: $weatherDescription, weatherHourlyList: ${weatherHourlyList.length})';
   }
 
   String calculateCelsius(dynamic temperature) =>
@@ -91,6 +101,8 @@ class Weather extends Equatable {
 
   @override
   List<Object?> get props => [
+        lat,
+        lon,
         cityName,
         temperature,
         conditionScore,
@@ -103,6 +115,8 @@ class Weather extends Equatable {
       ];
 
   Weather copyWith({
+    dynamic lat,
+    dynamic lon,
     String? cityName,
     dynamic temperature,
     int? conditionScore,
@@ -114,6 +128,8 @@ class Weather extends Equatable {
     List<WeatherHourly>? weatherHourlyList,
   }) {
     return Weather(
+      lat: lat ?? this.lat,
+      lon: lon ?? this.lat,
       cityName: cityName ?? this.cityName,
       temperature: temperature ?? this.temperature,
       conditionScore: conditionScore ?? this.conditionScore,

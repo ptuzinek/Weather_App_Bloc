@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
-import 'package:weather_app_bloc/data/data_providers/condition_emoji_provider.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -11,12 +10,12 @@ class FavoritesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF082032),
+      backgroundColor: Color(0xFF334756), //Color(0xFF082032),
       appBar: AppBar(
         toolbarHeight: 0,
         elevation: 0,
         brightness: Brightness.dark, // this makes status bar text color white
-        backgroundColor: Color(0xFF082032),
+        backgroundColor: Color(0xFF334756), //Color(0xFF082032),
       ),
       body: SafeArea(
         child: BlocBuilder<FavoriteCitiesCubit, FavoriteCitiesState>(
@@ -43,7 +42,7 @@ class FavoritesScreen extends StatelessWidget {
                       ),
                     ],
                     child: ListTile(
-                      tileColor: Color(0xFF464660),
+                      tileColor: Color(0xFF889EAF), // Color(0xFF464660),
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
                       trailing: Image.asset(
                           'images/weather_icons/${state.favoriteCitiesWeather[index].weatherIconId == '03d' ? '02d' : state.favoriteCitiesWeather[index].weatherIconId}.png'),
@@ -69,7 +68,17 @@ class FavoritesScreen extends StatelessWidget {
               );
             } else {
               return Center(
-                child: Text('No state case'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Loading Favorite Cities..'),
+                    SizedBox(height: 50),
+                    CircularProgressIndicator(
+                      color: Colors.grey[300],
+                    )
+                  ],
+                ),
               );
             }
           },
