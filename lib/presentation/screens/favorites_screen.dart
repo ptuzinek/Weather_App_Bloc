@@ -46,11 +46,6 @@ class FavoritesScreen extends StatelessWidget {
                       contentPadding: EdgeInsets.symmetric(horizontal: 20),
                       trailing: Image.asset(
                           'images/weather_icons/${state.favoriteCitiesWeather[index].weatherIconId == '03d' ? '02d' : state.favoriteCitiesWeather[index].weatherIconId}.png'),
-                      // Text(
-                      //   ConditionEmojiProvider.getWeatherEmoji(
-                      //       state.favoriteCitiesWeather[index].conditionScore),
-                      //   style: TextStyle(fontSize: 30),
-                      // ),
                       title: Text(state.favoriteCitiesWeather[index].cityName,
                           style: TextStyle(color: Colors.white)),
                       subtitle: Text(

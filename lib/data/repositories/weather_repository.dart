@@ -19,9 +19,6 @@ class WeatherRepository {
     final String rawWeatherData =
         await weatherProvider.getRawCityWeatherData(cityName);
 
-    print('JSON body:');
-    print(rawWeatherData);
-
     final Weather cityWeather = Weather.fromJson(rawWeatherData);
 
     final String rawHourlyForcast = await weatherProvider
@@ -63,9 +60,6 @@ class WeatherRepository {
 
     final Weather weather =
         tempWeather.copyWith(weatherHourlyList: weatherHourlyList);
-
-    print('--------------------------------WEATHER:');
-    print(weather);
 
     return weather;
   }

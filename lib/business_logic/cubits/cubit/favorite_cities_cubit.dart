@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
@@ -27,15 +28,14 @@ class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
   void addCityToFavorite(String cityName) async {
     //TODO: Implement saving City name to the database
     await weatherRepository.addFavoriteCity(cityName);
+    getFavoriteCitiesList();
   }
 
   void removeCityFromFavorites(Weather weather) async {
     if (state is FavoriteCitiesFetchSuccess) {
       List<Weather> newFavoriteCitiesList = List.from(
           (state as FavoriteCitiesFetchSuccess).favoriteCitiesWeather);
-      print('Favorites List BEFORE: $newFavoriteCitiesList');
       newFavoriteCitiesList.remove(weather);
-      print('Favorites List After: $newFavoriteCitiesList');
 
       emit(FavoriteCitiesFetchSuccess(
           favoriteCitiesWeather: newFavoriteCitiesList));
@@ -55,17 +55,11 @@ class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
 
   @override
   FavoriteCitiesState? fromJson(Map<String, dynamic> json) {
-    print('Favorites List JSON:');
-    print(json);
-    print('json.isNotEmpty:');
-    print(json.isNotEmpty);
     try {
       if (json.isNotEmpty) {
         print('Favorites List State LOADED');
         final favoriteCitiesFetchSuccess =
             FavoriteCitiesFetchSuccess.fromMap(json);
-        print('favoriteCitiesFetchSuccess:');
-        print(favoriteCitiesFetchSuccess);
         return favoriteCitiesFetchSuccess;
       }
     } catch (e) {
@@ -77,9 +71,6 @@ class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
   Map<String, dynamic>? toJson(FavoriteCitiesState state) {
     if (state is FavoriteCitiesFetchSuccess) {
       print('Favorites List State SAVED');
-      print('Favorites List State CONTENT:::::::::::::::::::');
-
-      print(state.toMap());
 
       return state.toMap();
     }

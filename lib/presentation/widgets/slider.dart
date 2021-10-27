@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app_bloc/data/models/weather_hourly.dart';
 import 'package:weather_app_bloc/presentation/widgets/hour_weather_box.dart';
 
 class WeatherSlider extends StatelessWidget {

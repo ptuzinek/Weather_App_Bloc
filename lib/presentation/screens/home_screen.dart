@@ -80,7 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 snap: false,
                 flexibleSpace: BlocBuilder<WeatherBloc, WeatherState>(
                   builder: (context, state) {
-                    if (state is WeatherFetchSuccess) {
+                    if (state is WeatherFetchSuccess ||
+                        state is WeatherCityNameFetchInProgress) {
                       return FlexibleSpaceBar(
                         titlePadding: EdgeInsets.only(top: 20),
                         collapseMode: CollapseMode.parallax,
@@ -95,32 +96,42 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(state.weather.cityName),
+                              state is WeatherCityNameFetchInProgress
+                                  ? Text(state.cityName)
+                                  : Text((state as WeatherFetchSuccess)
+                                      .weather
+                                      .cityName),
                               SizedBox(height: 3),
-                              Text(
-                                state.weather.weatherDescription,
-                                style: TextStyle(
-                                    fontSize: 11, color: Colors.white70),
-                              )
+                              state is WeatherCityNameFetchInProgress
+                                  ? Container()
+                                  : Text(
+                                      (state as WeatherFetchSuccess)
+                                          .weather
+                                          .weatherDescription,
+                                      style: TextStyle(
+                                          fontSize: 11, color: Colors.white70),
+                                    )
                             ],
                           ),
                         ),
-                        background: Align(
-                            alignment: Alignment.center,
-                            child: Align(
-                              alignment: Alignment(0, 0.5),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '${state.weather.calculateCelsius(state.weather.temperature)}°',
-                                    style: TextStyle(fontSize: 75),
+                        background: state is WeatherCityNameFetchInProgress
+                            ? Container()
+                            : Align(
+                                alignment: Alignment.center,
+                                child: Align(
+                                  alignment: Alignment(0, 0.5),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '${(state as WeatherFetchSuccess).weather.calculateCelsius(state.weather.temperature)}°',
+                                        style: TextStyle(fontSize: 75),
+                                      ),
+                                      Image.asset(
+                                          'images/weather_icons/${state.weather.weatherIconId == '03d' ? '02d' : state.weather.weatherIconId}.png'),
+                                    ],
                                   ),
-                                  Image.asset(
-                                      'images/weather_icons/${state.weather.weatherIconId == '03d' ? '02d' : state.weather.weatherIconId}.png'),
-                                ],
-                              ),
-                            )),
+                                )),
                       );
                     } else {
                       return Center(
@@ -136,12 +147,26 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: BlocBuilder<WeatherBloc, WeatherState>(
                 builder: (context, state) {
-                  if (state is WeatherFetchInProgress) {
+                  if (state is WeatherCityNameFetchInProgress) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 2,
+                          width: 20,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 20),
+                        Container(
+                          height: 2,
+                          width: 20,
+                          color: Colors.white,
+                        ),
+                      ],
+                    );
+                  } else if (state is WeatherLocalisationFetchInProgress) {
                     return CircularProgressIndicator();
                   } else if (state is WeatherFetchSuccess) {
-                    print('state.weather.weatherHourlyList-----------');
-
-                    print(state.weather.weatherHourlyList);
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,9 +192,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ),
-
-                        // Text(
-                        //     'Weather in ${state.weather.weatherHourlyList[0].temperature}'),
                         SizedBox(
                           height: 200,
                         ),

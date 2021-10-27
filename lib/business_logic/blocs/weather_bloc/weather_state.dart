@@ -17,7 +17,16 @@ class WeatherFetchSuccess extends WeatherState {
   List<Object?> get props => [weather];
 }
 
-class WeatherFetchInProgress extends WeatherState {
+class WeatherLocalisationFetchInProgress extends WeatherState {
+  @override
+  List<Object?> get props => [];
+}
+
+class WeatherCityNameFetchInProgress extends WeatherState {
+  final String cityName;
+
+  WeatherCityNameFetchInProgress({required this.cityName});
+
   @override
   List<Object?> get props => [];
 }

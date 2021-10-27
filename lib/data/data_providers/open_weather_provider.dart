@@ -18,8 +18,6 @@ class OpenWeatherProvider {
         'pro.openweathermap.org/data/2.5/forecast/hourly?q=$cityName&appid=${ApiKeys.OPEN_WEATHER_MAP_API_KEY}'));
 
     if (response.statusCode == 200) {
-      print('-------------------------------------- CITY HOURLY FORCAST: ');
-      print(response.body);
       return response.body;
     } else {
       print(response.statusCode);
@@ -31,8 +29,6 @@ class OpenWeatherProvider {
         'https://api.openweathermap.org/data/2.5/onecall?lat=$lat&lon=$lon&exclude=current,minutely,daily,alerts&appid=${ApiKeys.OPEN_WEATHER_MAP_API_KEY}'));
 
     if (response.statusCode == 200) {
-      print('-------------------------------------- LOCATION HOURLY FORCAST: ');
-      print('LOCATION HOURLY FORCAST:  ${response.body}');
       return response.body;
     } else {
       print(response.statusCode);
