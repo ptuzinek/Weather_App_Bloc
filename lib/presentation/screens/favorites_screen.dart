@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
@@ -14,7 +15,8 @@ class FavoritesScreen extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 0,
         elevation: 0,
-        brightness: Brightness.dark, // this makes status bar text color white
+        systemOverlayStyle: SystemUiOverlayStyle
+            .light, // this makes status bar text color white
         backgroundColor: Color(0xFF334756), //Color(0xFF082032),
       ),
       body: SafeArea(
