@@ -37,6 +37,7 @@ class WeatherHourly extends Equatable {
     );
   }
 
+// Reading from the API
   factory WeatherHourly.fromMap(Map<String, dynamic> map, int index) {
     final int temperatureCelsius = num.parse(
             (map['hourly'][index]['temp'].toInt() - 273).toStringAsFixed(0))

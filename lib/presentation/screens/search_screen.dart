@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
@@ -25,7 +26,8 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         toolbarHeight: 0,
         elevation: 0,
-        brightness: Brightness.dark, // this makes status bar text color black
+        systemOverlayStyle: SystemUiOverlayStyle
+            .light, // this makes status bar text color black
         backgroundColor: Colors.black, //Color(0xFF464660),
         leading: Container(),
       ),
