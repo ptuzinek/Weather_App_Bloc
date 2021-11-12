@@ -17,7 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<WeatherBloc>(context).add(LocationWeatherRequested());
+    BlocProvider.of<WeatherBloc>(context)
+        .add(CityWeatherRequested(cityName: 'London'));
+    // BlocProvider.of<WeatherBloc>(context).add(LocationWeatherRequested());
   }
 
   @override
@@ -107,6 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   : Text(
                                       (state as WeatherFetchSuccess)
                                           .weather
+                                          .weatherHourlyList[0]
                                           .weatherDescription,
                                       style: TextStyle(
                                           fontSize: 11, color: Colors.white70),
@@ -124,11 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        '${(state as WeatherFetchSuccess).weather.calculateCelsius(state.weather.temperature)}°',
+                                        '${(state as WeatherFetchSuccess).weather.calculateCelsius(state.weather.weatherHourlyList[0].temperature)}°',
                                         style: TextStyle(fontSize: 75),
                                       ),
                                       Image.asset(
-                                          'images/weather_icons/${state.weather.weatherIconId == '03d' ? '02d' : state.weather.weatherIconId}.png'),
+                                          'images/weather_icons/${state.weather.weatherHourlyList[0].weatherIconId == '03d' ? '02d' : state.weather.weatherHourlyList[0].weatherIconId}.png'),
                                     ],
                                   ),
                                 )),
@@ -167,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   } else if (state is WeatherLocalisationFetchInProgress) {
                     return CircularProgressIndicator();
                   } else if (state is WeatherFetchSuccess) {
+                    final currentWeather = state.weather.weatherHourlyList[0];
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -174,8 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         state.weather.weatherHourlyList.isNotEmpty
                             ? WeatherSlider(
-                                weatherHourlyList:
-                                    state.weather.weatherHourlyList,
+                                weather: state.weather,
                               )
                             : Column(
                                 children: [
@@ -200,24 +203,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 200,
                         ),
                         Text(
-                            'Temperature: ${state.weather.calculateCelsius(state.weather.temperature)} °C'),
+                            'Temperature: ${state.weather.calculateCelsius(currentWeather.temperature)} °C'),
                         SizedBox(
                           height: 200,
                         ),
-                        Text('Cloudiness: ${state.weather.cloudiness} %'),
+                        Text('Cloudiness: ${currentWeather.cloudiness} %'),
                         SizedBox(
                           height: 200,
                         ),
-                        Text('Pressure: ${state.weather.pressure} hPa'),
+                        Text('Pressure: ${currentWeather.pressure} hPa'),
                         SizedBox(
                           height: 200,
                         ),
-                        Text('Wind Speed: ${state.weather.windSpeed} m/s'),
+                        Text('Wind Speed: ${currentWeather.windSpeed} m/s'),
                         SizedBox(
                           height: 200,
                         ),
                         Text(
-                            'Description: ${state.weather.weatherDescription}'),
+                            'Description: ${currentWeather.weatherDescription}'),
                       ],
                     );
                   } else {

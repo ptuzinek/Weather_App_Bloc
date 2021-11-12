@@ -32,14 +32,14 @@ class FavoriteCitiesFetchSuccess extends FavoriteCitiesState {
   Map<String, dynamic> toMap() {
     return {
       'favoriteCitiesWeather':
-          favoriteCitiesWeather.map((x) => x.toMap()).toList(),
+          favoriteCitiesWeather.map((x) => x.toJson()).toList(),
     };
   }
 
   factory FavoriteCitiesFetchSuccess.fromMap(Map<String, dynamic> map) {
     return FavoriteCitiesFetchSuccess(
       favoriteCitiesWeather: List<Weather>.from(
-          map['favoriteCitiesWeather']?.map((x) => Weather.fromMapBloc(x))),
+          map['favoriteCitiesWeather']?.map((x) => Weather.fromJson(x))),
     );
   }
 

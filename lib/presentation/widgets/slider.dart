@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/presentation/widgets/hour_weather_box.dart';
 
 class WeatherSlider extends StatelessWidget {
-  final List<dynamic> weatherHourlyList;
-  const WeatherSlider({Key? key, required this.weatherHourlyList})
-      : super(key: key);
+  final Weather weather;
+  const WeatherSlider({Key? key, required this.weather}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final weatherList = weather.weatherHourlyList;
     return Flexible(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -25,14 +26,15 @@ class WeatherSlider extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) => HourWeatherBox(
                 hour: DateTime.fromMillisecondsSinceEpoch(
-                        (weatherHourlyList[index].timeStamp +
-                                weatherHourlyList[index].timeZoneOffset) *
+                        (weatherList[index].timeStamp +
+                                weather.timezoneOffset) *
                             1000)
                     .toUtc()
                     .hour,
-                temperature: weatherHourlyList[index].temperature,
+                temperature: weather
+                    .calculateCelsius(weatherList[index].temperature.toInt()),
                 asset:
-                    'images/weather_icons/${weatherHourlyList[index].weatherIconId == '03d' ? '02d' : weatherHourlyList[index].weatherIconId}.png',
+                    'images/weather_icons/${weatherList[index].weatherIconId == '03d' ? '02d' : weatherList[index].weatherIconId}.png',
               ),
             ),
           ),

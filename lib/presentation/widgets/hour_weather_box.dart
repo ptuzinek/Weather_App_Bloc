@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class HourWeatherBox extends StatelessWidget {
   final int hour;
-  final int temperature;
+  final String temperature;
   final String asset;
   const HourWeatherBox(
       {Key? key,

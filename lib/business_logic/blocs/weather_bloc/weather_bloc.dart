@@ -21,8 +21,9 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
   ) async* {
     if (event is CityWeatherRequested) {
       yield* _mapCityWeatherRequestedtoState(event);
-    } else if (event is LocationWeatherRequested) {
-      yield* _mapLocationWeatherRequestedtoState(event);
+      // }
+      // else if (event is LocationWeatherRequested) {
+      //   yield* _mapLocationWeatherRequestedtoState(event);
     } else if (event is FavoriteCityWeatherRequested) {
       yield* _mapFavoriteCityWeatherRequestedToState(event);
     }
@@ -40,15 +41,15 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
     }
   }
 
-  Stream<WeatherState> _mapLocationWeatherRequestedtoState(
-      LocationWeatherRequested event) async* {
-    try {
-      final weather = await weatherRepository.getLocationWeather();
-      yield WeatherFetchSuccess(weather: weather);
-    } catch (e) {
-      yield WeatherFetchFailure(error: e.toString());
-    }
-  }
+  // Stream<WeatherState> _mapLocationWeatherRequestedtoState(
+  //     LocationWeatherRequested event) async* {
+  //   try {
+  //     final weather = await weatherRepository.getLocationWeather();
+  //     yield WeatherFetchSuccess(weather: weather);
+  //   } catch (e) {
+  //     yield WeatherFetchFailure(error: e.toString());
+  //   }
+  // }
 
   Stream<WeatherState> _mapFavoriteCityWeatherRequestedToState(
       FavoriteCityWeatherRequested event) async* {
@@ -68,7 +69,7 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
   WeatherState? fromJson(Map<String, dynamic> json) {
     try {
       if (json.isNotEmpty) {
-        final weather = Weather.fromMapBloc(json);
+        final weather = Weather.fromJson(json);
         print('Weather State LOADED');
 
         return WeatherFetchSuccess(weather: weather);
@@ -82,7 +83,7 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
   Map<String, dynamic>? toJson(WeatherState state) {
     if (state is WeatherFetchSuccess) {
       print('Weather State SAVED');
-      return state.weather.toMap();
+      return state.weather.toJson();
     } else {
       return null;
     }

@@ -25,43 +25,47 @@ class FavoritesScreen extends StatelessWidget {
             if (state is FavoriteCitiesFetchSuccess) {
               return ListView.builder(
                 itemCount: state.favoriteCitiesWeather.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 1),
-                  child: Slidable(
-                    key: ValueKey('listTile$index'),
-                    actionPane: SlidableDrawerActionPane(),
-                    actionExtentRatio: 0.25,
-                    secondaryActions: [
-                      IconSlideAction(
-                        caption: 'Delete',
-                        color: Colors.red,
-                        icon: Icons.delete,
+                itemBuilder: (context, index) {
+                  final currentWeather =
+                      state.favoriteCitiesWeather[index].weatherHourlyList[0];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 1),
+                    child: Slidable(
+                      key: ValueKey('listTile$index'),
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.25,
+                      secondaryActions: [
+                        IconSlideAction(
+                          caption: 'Delete',
+                          color: Colors.red,
+                          icon: Icons.delete,
+                          onTap: () {
+                            BlocProvider.of<FavoriteCitiesCubit>(context)
+                                .removeCityFromFavorites(
+                                    state.favoriteCitiesWeather[index]);
+                          },
+                        ),
+                      ],
+                      child: ListTile(
+                        tileColor: Color(0xFF889EAF), // Color(0xFF464660),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                        trailing: Image.asset(
+                            'images/weather_icons/${currentWeather.weatherIconId == '03d' ? '02d' : currentWeather.weatherIconId}.png'),
+                        title: Text(state.favoriteCitiesWeather[index].cityName,
+                            style: TextStyle(color: Colors.white)),
+                        subtitle: Text(
+                            '${state.favoriteCitiesWeather[index].calculateCelsius(currentWeather.temperature)}°C',
+                            style: TextStyle(color: Colors.grey[300])),
                         onTap: () {
-                          BlocProvider.of<FavoriteCitiesCubit>(context)
-                              .removeCityFromFavorites(
-                                  state.favoriteCitiesWeather[index]);
+                          BlocProvider.of<WeatherBloc>(context).add(
+                              FavoriteCityWeatherRequested(
+                                  weather: state.favoriteCitiesWeather[index]));
+                          Navigator.pop(context);
                         },
                       ),
-                    ],
-                    child: ListTile(
-                      tileColor: Color(0xFF889EAF), // Color(0xFF464660),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                      trailing: Image.asset(
-                          'images/weather_icons/${state.favoriteCitiesWeather[index].weatherIconId == '03d' ? '02d' : state.favoriteCitiesWeather[index].weatherIconId}.png'),
-                      title: Text(state.favoriteCitiesWeather[index].cityName,
-                          style: TextStyle(color: Colors.white)),
-                      subtitle: Text(
-                          '${state.favoriteCitiesWeather[index].calculateCelsius(state.favoriteCitiesWeather[index].temperature)}°C',
-                          style: TextStyle(color: Colors.grey[300])),
-                      onTap: () {
-                        BlocProvider.of<WeatherBloc>(context).add(
-                            FavoriteCityWeatherRequested(
-                                weather: state.favoriteCitiesWeather[index]));
-                        Navigator.pop(context);
-                      },
                     ),
-                  ),
-                ),
+                  );
+                },
               );
             } else {
               return Center(
