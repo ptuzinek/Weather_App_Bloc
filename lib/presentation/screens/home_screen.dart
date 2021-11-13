@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_app_bloc/business_logic/blocs/weather_new_bloc/weather_new_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/presentation/widgets/slider.dart';
 
@@ -17,8 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<WeatherBloc>(context)
-        .add(CityWeatherRequested(cityName: 'London'));
+    BlocProvider.of<WeatherNewBloc>(context)
+        .add(WeatherNewEvent.cityWeatherRequested(cityName: 'London'));
     // BlocProvider.of<WeatherBloc>(context).add(LocationWeatherRequested());
   }
 
@@ -80,10 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 floating: false,
                 pinned: true,
                 snap: false,
-                flexibleSpace: BlocBuilder<WeatherBloc, WeatherState>(
+                flexibleSpace: BlocBuilder<WeatherNewBloc, WeatherNewState>(
                   builder: (context, state) {
                     if (state is WeatherFetchSuccess ||
-                        state is WeatherCityNameFetchInProgress) {
+                        state is WeatherFetchInProgress) {
                       return FlexibleSpaceBar(
                         titlePadding: EdgeInsets.only(top: 20),
                         collapseMode: CollapseMode.parallax,
@@ -98,13 +98,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              state is WeatherCityNameFetchInProgress
+                              state is WeatherFetchInProgress
                                   ? Text(state.cityName)
                                   : Text((state as WeatherFetchSuccess)
                                       .weather
                                       .cityName),
                               SizedBox(height: 3),
-                              state is WeatherCityNameFetchInProgress
+                              state is WeatherFetchInProgress
                                   ? Container()
                                   : Text(
                                       (state as WeatherFetchSuccess)
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                         ),
-                        background: state is WeatherCityNameFetchInProgress
+                        background: state is WeatherFetchInProgress
                             ? Container()
                             : Align(
                                 alignment: Alignment.center,
@@ -148,9 +148,9 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           body: SingleChildScrollView(
             child: Center(
-              child: BlocBuilder<WeatherBloc, WeatherState>(
+              child: BlocBuilder<WeatherNewBloc, WeatherNewState>(
                 builder: (context, state) {
-                  if (state is WeatherCityNameFetchInProgress) {
+                  if (state is WeatherFetchInProgress) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

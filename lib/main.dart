@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_app_bloc/business_logic/blocs/weather_new_bloc/weather_new_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/api/open_weather_api_client.dart';
 import 'package:weather_app_bloc/data/data_providers/favorite_cities_provider.dart';
@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<WeatherBloc>(
-          create: (context) => WeatherBloc(weatherRepository: repository),
+        BlocProvider<WeatherNewBloc>(
+          create: (context) => WeatherNewBloc(weatherRepository: repository),
         ),
         BlocProvider<FavoriteCitiesCubit>(
           create: (context) =>
