@@ -38,19 +38,17 @@ class OpenWeatherApiClient {
     }
   }
 
-  // // TODO - Implement returning type WeatherFull and throwing Exception when failure
-  // Future getRawLocationWeatherData(double lat, double lon) async {
-  //   http.Response response = await http.get(Uri.parse(
-  //       'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=${ApiKeys.OPEN_WEATHER_MAP_API_KEY}'));
+  Future<LocationResponse> getLocationInfo(double lat, double lon) async {
+    http.Response response = await http.get(Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=${ApiKeys.OPEN_WEATHER_MAP_API_KEY}'));
 
-  //   if (response.statusCode == 200) {
-  //     final bodyJson = jsonDecode(response.body) as Map<String, dynamic>;
-  //     final weather = WeatherFull.fromJson(bodyJson);
-  //     return weather;
-  //   } else {
-  //     print(response.statusCode);
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      final weather = LocationResponse.fromJson(json.decode(response.body));
+      return weather;
+    } else {
+      throw LocationRequestFailure();
+    }
+  }
 
   Future<Position> getLocation() async {
     return await Geolocator.getCurrentPosition(

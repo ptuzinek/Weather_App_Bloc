@@ -31,22 +31,18 @@ class WeatherRepository {
     return weather;
   }
 
-  // List of Weather objects, the first one is the current
+  Future<Weather> getLocationWeather() async {
+    final Position position = await weatherApiClient.getLocation();
+    final LocationResponse location = await weatherApiClient.getLocationInfo(
+        position.latitude, position.latitude);
+    final WeatherHourlyResponse weatherHourly = await weatherApiClient
+        .getLocationHourlyForcast(position.latitude, position.longitude);
 
-  // Future<Weather> getLocationWeather() async {
-  //   final Position position = await weatherApiClient.getLocation();
-  //   final WeatherFull weatherData = await weatherApiClient
-  //       .getRawLocationWeatherData(position.latitude, position.longitude);
+    final Weather weather = WeatherMapper.mapWeather(
+        locationResponse: location, weatherHourlyResponse: weatherHourly);
 
-  //   final WeatherHourly hourlyForcast = await weatherApiClient
-  //       .getLocationHourlyForcast(position.latitude, position.longitude);
-
-  //   final weatherFull = weatherData.copyWith(weatherHourly: hourlyForcast);
-
-  //   final Weather weather = WeatherMapper.mapWeather(weatherFull);
-
-  //   return weather;
-  // }
+    return weather;
+  }
 
   Future<List<Weather>> getFavoriteCitiesWeather() async {
     List<Weather> favoriteCitiesWeather = [];

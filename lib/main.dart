@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<WeatherNewBloc>(
-          create: (context) => WeatherNewBloc(weatherRepository: repository),
+          create: (context) => WeatherNewBloc(weatherRepository: repository)
+            ..add(LocationWeatherRequested()),
         ),
         BlocProvider<FavoriteCitiesCubit>(
           create: (context) =>

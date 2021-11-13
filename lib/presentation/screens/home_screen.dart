@@ -15,14 +15,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<WeatherNewBloc>(context)
-        .add(WeatherNewEvent.cityWeatherRequested(cityName: 'London'));
-    // BlocProvider.of<WeatherBloc>(context).add(LocationWeatherRequested());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,

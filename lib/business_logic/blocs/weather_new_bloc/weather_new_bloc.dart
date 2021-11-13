@@ -23,14 +23,14 @@ class WeatherNewBloc extends HydratedBloc<WeatherNewEvent, WeatherNewState> {
         emit(WeatherFetchFailure(error: e.toString()));
       }
     });
-    // on<LocationWeatherRequested>((event, emit) async {
-    //   try {
-    //     final weather = await weatherRepository.getLocationWeather();
-    //     emit(WeatherFetchSuccess(weather: weather));
-    //   } catch (e) {
-    //     emit(WeatherFetchFailure(error: e.toString()));
-    //   }
-    // });
+    on<LocationWeatherRequested>((event, emit) async {
+      try {
+        final weather = await weatherRepository.getLocationWeather();
+        emit(WeatherFetchSuccess(weather: weather));
+      } catch (e) {
+        emit(WeatherFetchFailure(error: e.toString()));
+      }
+    });
     on<FavoriteCityWeatherRequested>((event, emit) {
       emit(WeatherFetchSuccess(weather: event.weather));
     });
@@ -42,9 +42,18 @@ class WeatherNewBloc extends HydratedBloc<WeatherNewEvent, WeatherNewState> {
   }
 
   @override
-  WeatherNewState? fromJson(Map<String, dynamic> json) =>
-      WeatherNewState.fromJson(json);
+  WeatherNewState? fromJson(Map<String, dynamic> json) {
+    print(' --------------- >>>> Weather Loaded');
+    print(WeatherNewState.fromJson(json));
+    return WeatherNewState.fromJson(json);
+  }
 
   @override
-  Map<String, dynamic>? toJson(WeatherNewState state) => state.toJson();
+  Map<String, dynamic>? toJson(WeatherNewState state) {
+    print(' --------------- >>>> Weather Saved');
+
+    print(state.toJson());
+
+    return state.toJson();
+  }
 }
