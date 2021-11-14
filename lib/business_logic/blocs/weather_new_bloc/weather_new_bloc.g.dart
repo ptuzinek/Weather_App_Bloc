@@ -6,15 +6,6 @@ part of 'weather_new_bloc.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Initial _$$_InitialFromJson(Map<String, dynamic> json) => _$_Initial(
-      $type: json['type'] as String?,
-    );
-
-Map<String, dynamic> _$$_InitialToJson(_$_Initial instance) =>
-    <String, dynamic>{
-      'type': instance.$type,
-    };
-
 _$WeatherFetchSuccess _$$WeatherFetchSuccessFromJson(
         Map<String, dynamic> json) =>
     _$WeatherFetchSuccess(

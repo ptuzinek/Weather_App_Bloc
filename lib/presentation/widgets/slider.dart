@@ -9,41 +9,38 @@ class WeatherSlider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final weatherList = weather.weatherHourlyList;
-    return Flexible(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: 0.3,
-            width: double.infinity,
-            color: Colors.white,
-          ),
-          SizedBox(
-            height: 120,
-            child: ListView.builder(
-              itemCount: 24,
-              physics: ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => HourWeatherBox(
-                hour: DateTime.fromMillisecondsSinceEpoch(
-                        (weatherList[index].timeStamp +
-                                weather.timezoneOffset) *
-                            1000)
-                    .toUtc()
-                    .hour,
-                temperature: weather
-                    .calculateCelsius(weatherList[index].temperature.toInt()),
-                asset:
-                    'images/weather_icons/${weatherList[index].weatherIconId == '03d' ? '02d' : weatherList[index].weatherIconId}.png',
-              ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          height: 0.3,
+          width: double.infinity,
+          color: Colors.white,
+        ),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            itemCount: 24,
+            physics: ClampingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => HourWeatherBox(
+              hour: DateTime.fromMillisecondsSinceEpoch(
+                      (weatherList[index].timeStamp + weather.timezoneOffset) *
+                          1000)
+                  .toUtc()
+                  .hour,
+              temperature: weather
+                  .calculateCelsius(weatherList[index].temperature.toInt()),
+              asset:
+                  'images/weather_icons/${weatherList[index].weatherIconId == '03d' ? '02d' : weatherList[index].weatherIconId}.png',
             ),
           ),
-          Container(
-            height: 0.3,
-            color: Colors.white,
-          ),
-        ],
-      ),
+        ),
+        Container(
+          height: 0.3,
+          color: Colors.white,
+        ),
+      ],
     );
   }
 }

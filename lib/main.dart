@@ -10,6 +10,7 @@ import 'package:weather_app_bloc/data/database/favorite_cities_database.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 import 'package:weather_app_bloc/presentation/router/app_router.dart';
 import 'package:weather_app_bloc/presentation/screens/home_screen.dart';
+import 'package:weather_app_bloc/presentation/screens/home_screen_new.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
         onGenerateRoute: _appRouter.onGenerateRoute,
-        home: HomeScreen(),
+        home: HomeScreenNew(),
       ),
     );
   }

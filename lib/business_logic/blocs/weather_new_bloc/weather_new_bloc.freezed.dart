@@ -528,8 +528,6 @@ abstract class FavoriteCityWeatherRequested implements WeatherNewEvent {
 
 WeatherNewState _$WeatherNewStateFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
-    case 'initial':
-      return _Initial.fromJson(json);
     case 'weatherFetchSuccess':
       return WeatherFetchSuccess.fromJson(json);
     case 'weatherLocalisationFetchInProgress':
@@ -548,10 +546,6 @@ WeatherNewState _$WeatherNewStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 class _$WeatherNewStateTearOff {
   const _$WeatherNewStateTearOff();
-
-  _Initial initial() {
-    return const _Initial();
-  }
 
   WeatherFetchSuccess weatherFetchSuccess({required Weather weather}) {
     return WeatherFetchSuccess(
@@ -587,7 +581,6 @@ const $WeatherNewState = _$WeatherNewStateTearOff();
 mixin _$WeatherNewState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function(Weather weather) weatherFetchSuccess,
     required TResult Function() weatherLocalisationFetchInProgress,
     required TResult Function(String cityName) weatherFetchInProgress,
@@ -596,7 +589,6 @@ mixin _$WeatherNewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -605,7 +597,6 @@ mixin _$WeatherNewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -615,7 +606,6 @@ mixin _$WeatherNewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
     required TResult Function(WeatherFetchSuccess value) weatherFetchSuccess,
     required TResult Function(WeatherLocalisationFetchInProgress value)
         weatherLocalisationFetchInProgress,
@@ -626,7 +616,6 @@ mixin _$WeatherNewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -636,7 +625,6 @@ mixin _$WeatherNewState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -663,143 +651,6 @@ class _$WeatherNewStateCopyWithImpl<$Res>
   final WeatherNewState _value;
   // ignore: unused_field
   final $Res Function(WeatherNewState) _then;
-}
-
-/// @nodoc
-abstract class _$InitialCopyWith<$Res> {
-  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-      __$InitialCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$WeatherNewStateCopyWithImpl<$Res>
-    implements _$InitialCopyWith<$Res> {
-  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
-      : super(_value, (v) => _then(v as _Initial));
-
-  @override
-  _Initial get _value => super._value as _Initial;
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Initial implements _Initial {
-  const _$_Initial({String? $type}) : $type = $type ?? 'initial';
-
-  factory _$_Initial.fromJson(Map<String, dynamic> json) =>
-      _$$_InitialFromJson(json);
-
-  @JsonKey(name: 'type')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'WeatherNewState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Weather weather) weatherFetchSuccess,
-    required TResult Function() weatherLocalisationFetchInProgress,
-    required TResult Function(String cityName) weatherFetchInProgress,
-    required TResult Function(Object error) weatherFetchFailure,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Weather weather)? weatherFetchSuccess,
-    TResult Function()? weatherLocalisationFetchInProgress,
-    TResult Function(String cityName)? weatherFetchInProgress,
-    TResult Function(Object error)? weatherFetchFailure,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Weather weather)? weatherFetchSuccess,
-    TResult Function()? weatherLocalisationFetchInProgress,
-    TResult Function(String cityName)? weatherFetchInProgress,
-    TResult Function(Object error)? weatherFetchFailure,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(WeatherFetchSuccess value) weatherFetchSuccess,
-    required TResult Function(WeatherLocalisationFetchInProgress value)
-        weatherLocalisationFetchInProgress,
-    required TResult Function(WeatherFetchInProgress value)
-        weatherFetchInProgress,
-    required TResult Function(WeatherFetchFailure value) weatherFetchFailure,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
-    TResult Function(WeatherLocalisationFetchInProgress value)?
-        weatherLocalisationFetchInProgress,
-    TResult Function(WeatherFetchInProgress value)? weatherFetchInProgress,
-    TResult Function(WeatherFetchFailure value)? weatherFetchFailure,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
-    TResult Function(WeatherLocalisationFetchInProgress value)?
-        weatherLocalisationFetchInProgress,
-    TResult Function(WeatherFetchInProgress value)? weatherFetchInProgress,
-    TResult Function(WeatherFetchFailure value)? weatherFetchFailure,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_InitialToJson(this);
-  }
-}
-
-abstract class _Initial implements WeatherNewState {
-  const factory _Initial() = _$_Initial;
-
-  factory _Initial.fromJson(Map<String, dynamic> json) = _$_Initial.fromJson;
 }
 
 /// @nodoc
@@ -882,7 +733,6 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function(Weather weather) weatherFetchSuccess,
     required TResult Function() weatherLocalisationFetchInProgress,
     required TResult Function(String cityName) weatherFetchInProgress,
@@ -894,7 +744,6 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -906,7 +755,6 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -922,7 +770,6 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
     required TResult Function(WeatherFetchSuccess value) weatherFetchSuccess,
     required TResult Function(WeatherLocalisationFetchInProgress value)
         weatherLocalisationFetchInProgress,
@@ -936,7 +783,6 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -949,7 +795,6 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -1036,7 +881,6 @@ class _$WeatherLocalisationFetchInProgress
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function(Weather weather) weatherFetchSuccess,
     required TResult Function() weatherLocalisationFetchInProgress,
     required TResult Function(String cityName) weatherFetchInProgress,
@@ -1048,7 +892,6 @@ class _$WeatherLocalisationFetchInProgress
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -1060,7 +903,6 @@ class _$WeatherLocalisationFetchInProgress
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -1076,7 +918,6 @@ class _$WeatherLocalisationFetchInProgress
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
     required TResult Function(WeatherFetchSuccess value) weatherFetchSuccess,
     required TResult Function(WeatherLocalisationFetchInProgress value)
         weatherLocalisationFetchInProgress,
@@ -1090,7 +931,6 @@ class _$WeatherLocalisationFetchInProgress
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -1103,7 +943,6 @@ class _$WeatherLocalisationFetchInProgress
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -1205,7 +1044,6 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function(Weather weather) weatherFetchSuccess,
     required TResult Function() weatherLocalisationFetchInProgress,
     required TResult Function(String cityName) weatherFetchInProgress,
@@ -1217,7 +1055,6 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -1229,7 +1066,6 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -1245,7 +1081,6 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
     required TResult Function(WeatherFetchSuccess value) weatherFetchSuccess,
     required TResult Function(WeatherLocalisationFetchInProgress value)
         weatherLocalisationFetchInProgress,
@@ -1259,7 +1094,6 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -1272,7 +1106,6 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -1377,7 +1210,6 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
     required TResult Function(Weather weather) weatherFetchSuccess,
     required TResult Function() weatherLocalisationFetchInProgress,
     required TResult Function(String cityName) weatherFetchInProgress,
@@ -1389,7 +1221,6 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -1401,7 +1232,6 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
     TResult Function(Weather weather)? weatherFetchSuccess,
     TResult Function()? weatherLocalisationFetchInProgress,
     TResult Function(String cityName)? weatherFetchInProgress,
@@ -1417,7 +1247,6 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
     required TResult Function(WeatherFetchSuccess value) weatherFetchSuccess,
     required TResult Function(WeatherLocalisationFetchInProgress value)
         weatherLocalisationFetchInProgress,
@@ -1431,7 +1260,6 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,
@@ -1444,7 +1272,6 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
     TResult Function(WeatherFetchSuccess value)? weatherFetchSuccess,
     TResult Function(WeatherLocalisationFetchInProgress value)?
         weatherLocalisationFetchInProgress,

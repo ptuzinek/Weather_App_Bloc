@@ -2,7 +2,6 @@ part of 'weather_new_bloc.dart';
 
 @freezed
 class WeatherNewState with _$WeatherNewState {
-  const factory WeatherNewState.initial() = _Initial;
   const factory WeatherNewState.weatherFetchSuccess({
     required Weather weather,
   }) = WeatherFetchSuccess;

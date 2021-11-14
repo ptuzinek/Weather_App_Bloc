@@ -18,7 +18,7 @@ class HourWeatherBox extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Flexible(child: Text(hour.toString())),
+          Text(hour.toString()),
           Padding(
             padding: const EdgeInsets.only(top: 3, bottom: 4),
             child: SizedBox(
@@ -27,7 +27,7 @@ class HourWeatherBox extends StatelessWidget {
               child: Image.asset(asset),
             ),
           ),
-          Flexible(child: Text('${temperature.toString()}°')),
+          Text('${temperature.toString()}°'),
         ],
       ),
     );
