@@ -9,7 +9,6 @@ import 'package:weather_app_bloc/data/data_providers/favorite_cities_provider.da
 import 'package:weather_app_bloc/data/database/favorite_cities_database.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 import 'package:weather_app_bloc/presentation/router/app_router.dart';
-import 'package:weather_app_bloc/presentation/screens/home_screen.dart';
 import 'package:weather_app_bloc/presentation/screens/home_screen_new.dart';
 
 void main() async {

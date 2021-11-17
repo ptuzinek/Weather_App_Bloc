@@ -1,13 +1,14 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 
 part 'favorite_cities_state.dart';
+part 'favorite_cities_cubit.freezed.dart';
+part 'favorite_cities_cubit.g.dart';
 
 class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
   final WeatherRepository weatherRepository;
@@ -55,25 +56,14 @@ class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
 
   @override
   FavoriteCitiesState? fromJson(Map<String, dynamic> json) {
-    try {
-      if (json.isNotEmpty) {
-        print('Favorites List State LOADED');
-        final favoriteCitiesFetchSuccess =
-            FavoriteCitiesFetchSuccess.fromMap(json);
-        return favoriteCitiesFetchSuccess;
-      }
-    } catch (e) {
-      FavoriteCitiesFetchFailure(error: e.toString());
-    }
+    print(' --------------- >>>> Favorite Cities Loaded:');
+    return FavoriteCitiesState.fromJson(json);
   }
 
   @override
   Map<String, dynamic>? toJson(FavoriteCitiesState state) {
-    if (state is FavoriteCitiesFetchSuccess) {
-      print('Favorites List State SAVED');
+    print(' --------------- >>>> Favorite Cities Saved:');
 
-      return state.toMap();
-    }
-    return null;
+    return state.toJson();
   }
 }

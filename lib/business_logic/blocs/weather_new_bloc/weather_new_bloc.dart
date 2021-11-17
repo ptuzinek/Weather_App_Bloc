@@ -44,16 +44,12 @@ class WeatherNewBloc extends HydratedBloc<WeatherNewEvent, WeatherNewState> {
   @override
   WeatherNewState? fromJson(Map<String, dynamic> json) {
     print(' --------------- >>>> Weather Loaded');
-    print(WeatherNewState.fromJson(json));
     return WeatherNewState.fromJson(json);
   }
 
   @override
   Map<String, dynamic>? toJson(WeatherNewState state) {
     print(' --------------- >>>> Weather Saved');
-
-    print(state.toJson());
-
     return state.toJson();
   }
 }
