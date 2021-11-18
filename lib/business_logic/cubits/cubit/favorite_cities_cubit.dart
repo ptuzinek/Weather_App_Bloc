@@ -16,11 +16,15 @@ class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
       : super(FavoriteCitiesInitial());
 
   Future<void> getFavoriteCitiesList() async {
-    List<Weather> favoriteCitiesWeather =
-        await weatherRepository.getFavoriteCitiesWeather();
     try {
-      emit(FavoriteCitiesFetchSuccess(
-          favoriteCitiesWeather: favoriteCitiesWeather));
+      List<Weather> favoriteCitiesWeather =
+          await weatherRepository.getFavoriteCitiesWeather();
+      if (favoriteCitiesWeather.isNotEmpty) {
+        emit(FavoriteCitiesFetchSuccess(
+            favoriteCitiesWeather: favoriteCitiesWeather));
+      } else {
+        emit(FavoriteCitiesInitial());
+      }
     } catch (e) {
       emit(FavoriteCitiesFetchFailure(error: e.toString()));
     }
