@@ -11,6 +11,7 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final state = context.watch<FavoriteCitiesCubit>().state;
     return Scaffold(
       backgroundColor: Color(0xFF334756),
       appBar: AppBar(
@@ -21,23 +22,14 @@ class FavoritesScreen extends StatelessWidget {
         backgroundColor: Color(0xFF334756),
       ),
       body: SafeArea(
-        child: Builder(
-          builder: (context) {
-            final state = context.watch<FavoriteCitiesCubit>().state;
-            return state.map(
-              favoriteCitiesInitial: (favoritesState) => NoFavoriteCities(),
-              favoriteCitiesFetchInProgress: (favoritesState) =>
-                  FavoriteCitiesLoading(),
-              favoriteCitiesFetchSuccess: (favoritesState) =>
-                  FavoriteListPopulated(
-                      favoriteCitiesWeather:
-                          favoritesState.favoriteCitiesWeather),
-              favoriteCitiesFetchFailure: (favoritesState) =>
-                  FavoriteCitiesFailure(),
-            );
-          },
-        ),
-      ),
+          child: state.map(
+        favoriteCitiesInitial: (favoritesState) => NoFavoriteCities(),
+        favoriteCitiesFetchInProgress: (favoritesState) =>
+            FavoriteCitiesLoading(),
+        favoriteCitiesFetchSuccess: (favoritesState) => FavoriteListPopulated(
+            favoriteCitiesWeather: favoritesState.favoriteCitiesWeather),
+        favoriteCitiesFetchFailure: (favoritesState) => FavoriteCitiesFailure(),
+      )),
     );
   }
 }

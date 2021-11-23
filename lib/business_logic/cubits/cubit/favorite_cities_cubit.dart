@@ -56,9 +56,6 @@ class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
   }
 
   @override
-  String get id => 'favorites';
-
-  @override
   FavoriteCitiesState? fromJson(Map<String, dynamic> json) {
     print(' --------------- >>>> Favorite Cities Loaded:');
     return FavoriteCitiesState.fromJson(json);

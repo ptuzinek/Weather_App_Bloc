@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -14,20 +15,18 @@ import 'package:weather_app_bloc/presentation/screens/home_screen_new.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  HydratedBloc.storage = await HydratedStorage.build(
+  final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
 
-  final OpenWeatherApiClient openWeatherProvider = OpenWeatherApiClient();
-  final FavoriteCitiesDatabase favoriteCitiesDatabase =
-      FavoriteCitiesDatabase();
-  final FavoriteCitiesProvider favoriteCitiesProvider =
-      FavoriteCitiesProvider(database: favoriteCitiesDatabase);
-  runApp(MyApp(
-    repository: WeatherRepository(
-        weatherApiClient: openWeatherProvider,
-        favoriteCitiesProvider: favoriteCitiesProvider),
-  ));
+  HydratedBlocOverrides.runZoned(
+    () => runApp(MyApp(
+        repository: WeatherRepository(
+            weatherApiClient: OpenWeatherApiClient(),
+            favoriteCitiesProvider:
+                FavoriteCitiesProvider(database: FavoriteCitiesDatabase())))),
+    storage: storage,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,8 +44,10 @@ class MyApp extends StatelessWidget {
             ..add(LocationWeatherRequested()),
         ),
         BlocProvider<FavoriteCitiesCubit>(
+          lazy: false,
           create: (context) =>
-              FavoriteCitiesCubit(weatherRepository: repository),
+              FavoriteCitiesCubit(weatherRepository: repository)
+                ..getFavoriteCitiesList(),
         ),
       ],
       child: MaterialApp(
