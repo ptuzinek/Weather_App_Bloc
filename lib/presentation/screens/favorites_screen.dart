@@ -55,7 +55,20 @@ class NoFavoriteCities extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Favorite Cities will show up here'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('Favorite Cities will show up here'),
+          TextButton.icon(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            label: Text('Go Back'),
+          ),
+        ],
+      ),
     );
   }
 }

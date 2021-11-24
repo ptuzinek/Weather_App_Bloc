@@ -42,8 +42,12 @@ class FavoriteCitiesCubit extends HydratedCubit<FavoriteCitiesState> {
           (state as FavoriteCitiesFetchSuccess).favoriteCitiesWeather);
       newFavoriteCitiesList.remove(weather);
 
-      emit(FavoriteCitiesFetchSuccess(
-          favoriteCitiesWeather: newFavoriteCitiesList));
+      if (newFavoriteCitiesList.length > 0) {
+        emit(FavoriteCitiesFetchSuccess(
+            favoriteCitiesWeather: newFavoriteCitiesList));
+      } else {
+        emit(FavoriteCitiesInitial());
+      }
 
       await weatherRepository.removeFavoriteCity(weather.cityName);
     }
