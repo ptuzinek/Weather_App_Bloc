@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_new_bloc/weather_new_bloc.dart';
+import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/presentation/widgets/slider.dart';
 
@@ -261,6 +262,8 @@ class BottomMenu extends StatelessWidget {
               Flexible(
                 child: IconButton(
                   onPressed: () {
+                    BlocProvider.of<FavoriteCitiesCubit>(context)
+                        .getFavoriteCitiesList();
                     Navigator.pushNamed(context, '/favorites');
                   },
                   icon: Icon(

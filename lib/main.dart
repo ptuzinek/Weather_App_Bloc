@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_services_binding/flutter_services_binding.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_new_bloc/weather_new_bloc.dart';
@@ -13,7 +13,7 @@ import 'package:weather_app_bloc/presentation/router/app_router.dart';
 import 'package:weather_app_bloc/presentation/screens/home_screen_new.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  FlutterServicesBinding.ensureInitialized();
 
   final storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
@@ -44,10 +44,8 @@ class MyApp extends StatelessWidget {
             ..add(LocationWeatherRequested()),
         ),
         BlocProvider<FavoriteCitiesCubit>(
-          lazy: false,
           create: (context) =>
-              FavoriteCitiesCubit(weatherRepository: repository)
-                ..getFavoriteCitiesList(),
+              FavoriteCitiesCubit(weatherRepository: repository),
         ),
       ],
       child: MaterialApp(
