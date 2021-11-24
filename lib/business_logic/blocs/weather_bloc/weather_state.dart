@@ -1,41 +1,22 @@
 part of 'weather_bloc.dart';
 
-@immutable
-abstract class WeatherState extends Equatable {}
+@freezed
+class WeatherState with _$WeatherState {
+  const factory WeatherState.weatherFetchSuccess({
+    required Weather weather,
+  }) = WeatherFetchSuccess;
 
-class WeatherInitial extends WeatherState {
-  @override
-  List<Object?> get props => [];
-}
+  const factory WeatherState.weatherLocalisationFetchInProgress() =
+      WeatherLocalisationFetchInProgress;
 
-class WeatherFetchSuccess extends WeatherState {
-  final Weather weather;
+  const factory WeatherState.weatherFetchInProgress({
+    required String cityName,
+  }) = WeatherFetchInProgress;
 
-  WeatherFetchSuccess({required this.weather});
+  const factory WeatherState.weatherFetchFailure({
+    required Object error,
+  }) = WeatherFetchFailure;
 
-  @override
-  List<Object?> get props => [weather];
-}
-
-class WeatherLocalisationFetchInProgress extends WeatherState {
-  @override
-  List<Object?> get props => [];
-}
-
-class WeatherCityNameFetchInProgress extends WeatherState {
-  final String cityName;
-
-  WeatherCityNameFetchInProgress({required this.cityName});
-
-  @override
-  List<Object?> get props => [];
-}
-
-class WeatherFetchFailure extends WeatherState {
-  final Object error;
-
-  WeatherFetchFailure({required this.error});
-
-  @override
-  List<Object?> get props => [error];
+  factory WeatherState.fromJson(Map<String, dynamic> json) =>
+      _$WeatherStateFromJson(json);
 }

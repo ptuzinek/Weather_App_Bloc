@@ -1,30 +1,15 @@
 part of 'weather_bloc.dart';
 
-@immutable
-abstract class WeatherEvent extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+@freezed
+class WeatherEvent with _$WeatherEvent {
+  const factory WeatherEvent.cityWeatherRequested({
+    required String cityName,
+  }) = CityWeatherRequested;
 
-class CityWeatherRequested extends WeatherEvent {
-  final String cityName;
+  const factory WeatherEvent.locationWeatherRequested() =
+      LocationWeatherRequested;
 
-  CityWeatherRequested({required this.cityName});
-
-  @override
-  List<Object> get props => [cityName];
-}
-
-class LocationWeatherRequested extends WeatherEvent {
-  @override
-  List<Object> get props => [];
-}
-
-class FavoriteCityWeatherRequested extends WeatherEvent {
-  final Weather weather;
-
-  FavoriteCityWeatherRequested({required this.weather});
-
-  @override
-  List<Object> get props => [weather];
+  const factory WeatherEvent.favoriteCityWeatherRequested({
+    required Weather weather,
+  }) = FavoriteCityWeatherRequested;
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:weather_app_bloc/business_logic/blocs/weather_new_bloc/weather_new_bloc.dart';
-import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
+import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_app_bloc/business_logic/cubits/favorite_cities_cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/data_providers/city_names_provider.dart';
 import 'package:weather_app_bloc/data/models/city_suggestion.dart';
 
@@ -151,7 +151,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     suggestion.text2 +
                                     suggestion.text3;
                                 this._typeAheadController.text = cityName;
-                                BlocProvider.of<WeatherNewBloc>(context).add(
+                                BlocProvider.of<WeatherBloc>(context).add(
                                     CityWeatherRequested(cityName: cityName));
                                 BlocProvider.of<FavoriteCitiesCubit>(context)
                                     .addCityToFavorite(cityName);

@@ -1,64 +1,40 @@
-import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';
+part 'weather_bloc.freezed.dart';
+part 'weather_bloc.g.dart';
 
 class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
   final WeatherRepository weatherRepository;
+
   WeatherBloc({required this.weatherRepository})
-      : super(WeatherLocalisationFetchInProgress());
-
-  @override
-  Stream<WeatherState> mapEventToState(
-    WeatherEvent event,
-  ) async* {
-    if (event is CityWeatherRequested) {
-      yield* _mapCityWeatherRequestedtoState(event);
-      // }
-      // else if (event is LocationWeatherRequested) {
-      //   yield* _mapLocationWeatherRequestedtoState(event);
-    } else if (event is FavoriteCityWeatherRequested) {
-      yield* _mapFavoriteCityWeatherRequestedToState(event);
-    }
+      : super(WeatherLocalisationFetchInProgress()) {
+    on<CityWeatherRequested>((event, emit) async {
+      emit(WeatherFetchInProgress(cityName: event.cityName));
+      try {
+        final weather = await weatherRepository.getCityWeather(event.cityName);
+        emit(WeatherFetchSuccess(weather: weather));
+      } catch (e) {
+        emit(WeatherFetchFailure(error: e.toString()));
+      }
+    });
+    on<LocationWeatherRequested>((event, emit) async {
+      try {
+        final weather = await weatherRepository.getLocationWeather();
+        emit(WeatherFetchSuccess(weather: weather));
+      } catch (e) {
+        emit(WeatherFetchFailure(error: e.toString()));
+      }
+    });
+    on<FavoriteCityWeatherRequested>((event, emit) {
+      emit(WeatherFetchSuccess(weather: event.weather));
+    });
   }
-
-  Stream<WeatherState> _mapCityWeatherRequestedtoState(
-      CityWeatherRequested event) async* {
-    yield WeatherCityNameFetchInProgress(cityName: event.cityName);
-
-    try {
-      final weather = await weatherRepository.getCityWeather(event.cityName);
-      yield WeatherFetchSuccess(weather: weather);
-    } catch (e) {
-      yield WeatherFetchFailure(error: e.toString());
-    }
-  }
-
-  // Stream<WeatherState> _mapLocationWeatherRequestedtoState(
-  //     LocationWeatherRequested event) async* {
-  //   try {
-  //     final weather = await weatherRepository.getLocationWeather();
-  //     yield WeatherFetchSuccess(weather: weather);
-  //   } catch (e) {
-  //     yield WeatherFetchFailure(error: e.toString());
-  //   }
-  // }
-
-  Stream<WeatherState> _mapFavoriteCityWeatherRequestedToState(
-      FavoriteCityWeatherRequested event) async* {
-    yield WeatherFetchSuccess(weather: event.weather);
-  }
-
-  @override
-  String get id => 'weather';
-
   @override
   void onTransition(Transition<WeatherEvent, WeatherState> transition) {
     print(transition);
@@ -67,25 +43,13 @@ class WeatherBloc extends HydratedBloc<WeatherEvent, WeatherState> {
 
   @override
   WeatherState? fromJson(Map<String, dynamic> json) {
-    try {
-      if (json.isNotEmpty) {
-        final weather = Weather.fromJson(json);
-        print('Weather State LOADED');
-
-        return WeatherFetchSuccess(weather: weather);
-      }
-    } catch (e) {
-      return WeatherFetchFailure(error: e.toString());
-    }
+    print(' --------------- >>>> Weather Loaded');
+    return WeatherState.fromJson(json);
   }
 
   @override
   Map<String, dynamic>? toJson(WeatherState state) {
-    if (state is WeatherFetchSuccess) {
-      print('Weather State SAVED');
-      return state.weather.toJson();
-    } else {
-      return null;
-    }
+    print(' --------------- >>>> Weather Saved');
+    return state.toJson();
   }
 }

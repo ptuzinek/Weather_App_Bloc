@@ -1,8 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
-import 'package:weather_app_bloc/data/constants/city_names.dart';
+import 'package:weather_app_bloc/business_logic/cubits/favorite_cities_cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/models/hour_weather.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';

@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'weather_new_bloc.dart';
+part of 'weather_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,8 +14,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$WeatherNewEventTearOff {
-  const _$WeatherNewEventTearOff();
+class _$WeatherEventTearOff {
+  const _$WeatherEventTearOff();
 
   CityWeatherRequested cityWeatherRequested({required String cityName}) {
     return CityWeatherRequested(
@@ -36,10 +36,10 @@ class _$WeatherNewEventTearOff {
 }
 
 /// @nodoc
-const $WeatherNewEvent = _$WeatherNewEventTearOff();
+const $WeatherEvent = _$WeatherEventTearOff();
 
 /// @nodoc
-mixin _$WeatherNewEvent {
+mixin _$WeatherEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String cityName) cityWeatherRequested,
@@ -91,20 +91,19 @@ mixin _$WeatherNewEvent {
 }
 
 /// @nodoc
-abstract class $WeatherNewEventCopyWith<$Res> {
-  factory $WeatherNewEventCopyWith(
-          WeatherNewEvent value, $Res Function(WeatherNewEvent) then) =
-      _$WeatherNewEventCopyWithImpl<$Res>;
+abstract class $WeatherEventCopyWith<$Res> {
+  factory $WeatherEventCopyWith(
+          WeatherEvent value, $Res Function(WeatherEvent) then) =
+      _$WeatherEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$WeatherNewEventCopyWithImpl<$Res>
-    implements $WeatherNewEventCopyWith<$Res> {
-  _$WeatherNewEventCopyWithImpl(this._value, this._then);
+class _$WeatherEventCopyWithImpl<$Res> implements $WeatherEventCopyWith<$Res> {
+  _$WeatherEventCopyWithImpl(this._value, this._then);
 
-  final WeatherNewEvent _value;
+  final WeatherEvent _value;
   // ignore: unused_field
-  final $Res Function(WeatherNewEvent) _then;
+  final $Res Function(WeatherEvent) _then;
 }
 
 /// @nodoc
@@ -117,7 +116,7 @@ abstract class $CityWeatherRequestedCopyWith<$Res> {
 
 /// @nodoc
 class _$CityWeatherRequestedCopyWithImpl<$Res>
-    extends _$WeatherNewEventCopyWithImpl<$Res>
+    extends _$WeatherEventCopyWithImpl<$Res>
     implements $CityWeatherRequestedCopyWith<$Res> {
   _$CityWeatherRequestedCopyWithImpl(
       CityWeatherRequested _value, $Res Function(CityWeatherRequested) _then)
@@ -149,7 +148,7 @@ class _$CityWeatherRequested implements CityWeatherRequested {
 
   @override
   String toString() {
-    return 'WeatherNewEvent.cityWeatherRequested(cityName: $cityName)';
+    return 'WeatherEvent.cityWeatherRequested(cityName: $cityName)';
   }
 
   @override
@@ -243,7 +242,7 @@ class _$CityWeatherRequested implements CityWeatherRequested {
   }
 }
 
-abstract class CityWeatherRequested implements WeatherNewEvent {
+abstract class CityWeatherRequested implements WeatherEvent {
   const factory CityWeatherRequested({required String cityName}) =
       _$CityWeatherRequested;
 
@@ -262,7 +261,7 @@ abstract class $LocationWeatherRequestedCopyWith<$Res> {
 
 /// @nodoc
 class _$LocationWeatherRequestedCopyWithImpl<$Res>
-    extends _$WeatherNewEventCopyWithImpl<$Res>
+    extends _$WeatherEventCopyWithImpl<$Res>
     implements $LocationWeatherRequestedCopyWith<$Res> {
   _$LocationWeatherRequestedCopyWithImpl(LocationWeatherRequested _value,
       $Res Function(LocationWeatherRequested) _then)
@@ -280,7 +279,7 @@ class _$LocationWeatherRequested implements LocationWeatherRequested {
 
   @override
   String toString() {
-    return 'WeatherNewEvent.locationWeatherRequested()';
+    return 'WeatherEvent.locationWeatherRequested()';
   }
 
   @override
@@ -365,7 +364,7 @@ class _$LocationWeatherRequested implements LocationWeatherRequested {
   }
 }
 
-abstract class LocationWeatherRequested implements WeatherNewEvent {
+abstract class LocationWeatherRequested implements WeatherEvent {
   const factory LocationWeatherRequested() = _$LocationWeatherRequested;
 }
 
@@ -382,7 +381,7 @@ abstract class $FavoriteCityWeatherRequestedCopyWith<$Res> {
 
 /// @nodoc
 class _$FavoriteCityWeatherRequestedCopyWithImpl<$Res>
-    extends _$WeatherNewEventCopyWithImpl<$Res>
+    extends _$WeatherEventCopyWithImpl<$Res>
     implements $FavoriteCityWeatherRequestedCopyWith<$Res> {
   _$FavoriteCityWeatherRequestedCopyWithImpl(
       FavoriteCityWeatherRequested _value,
@@ -423,7 +422,7 @@ class _$FavoriteCityWeatherRequested implements FavoriteCityWeatherRequested {
 
   @override
   String toString() {
-    return 'WeatherNewEvent.favoriteCityWeatherRequested(weather: $weather)';
+    return 'WeatherEvent.favoriteCityWeatherRequested(weather: $weather)';
   }
 
   @override
@@ -516,7 +515,7 @@ class _$FavoriteCityWeatherRequested implements FavoriteCityWeatherRequested {
   }
 }
 
-abstract class FavoriteCityWeatherRequested implements WeatherNewEvent {
+abstract class FavoriteCityWeatherRequested implements WeatherEvent {
   const factory FavoriteCityWeatherRequested({required Weather weather}) =
       _$FavoriteCityWeatherRequested;
 
@@ -526,7 +525,7 @@ abstract class FavoriteCityWeatherRequested implements WeatherNewEvent {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-WeatherNewState _$WeatherNewStateFromJson(Map<String, dynamic> json) {
+WeatherState _$WeatherStateFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
     case 'weatherFetchSuccess':
       return WeatherFetchSuccess.fromJson(json);
@@ -538,14 +537,14 @@ WeatherNewState _$WeatherNewStateFromJson(Map<String, dynamic> json) {
       return WeatherFetchFailure.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(json, 'type', 'WeatherNewState',
+      throw CheckedFromJsonException(json, 'type', 'WeatherState',
           'Invalid union type "${json['type']}"!');
   }
 }
 
 /// @nodoc
-class _$WeatherNewStateTearOff {
-  const _$WeatherNewStateTearOff();
+class _$WeatherStateTearOff {
+  const _$WeatherStateTearOff();
 
   WeatherFetchSuccess weatherFetchSuccess({required Weather weather}) {
     return WeatherFetchSuccess(
@@ -569,16 +568,16 @@ class _$WeatherNewStateTearOff {
     );
   }
 
-  WeatherNewState fromJson(Map<String, Object?> json) {
-    return WeatherNewState.fromJson(json);
+  WeatherState fromJson(Map<String, Object?> json) {
+    return WeatherState.fromJson(json);
   }
 }
 
 /// @nodoc
-const $WeatherNewState = _$WeatherNewStateTearOff();
+const $WeatherState = _$WeatherStateTearOff();
 
 /// @nodoc
-mixin _$WeatherNewState {
+mixin _$WeatherState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Weather weather) weatherFetchSuccess,
@@ -637,20 +636,19 @@ mixin _$WeatherNewState {
 }
 
 /// @nodoc
-abstract class $WeatherNewStateCopyWith<$Res> {
-  factory $WeatherNewStateCopyWith(
-          WeatherNewState value, $Res Function(WeatherNewState) then) =
-      _$WeatherNewStateCopyWithImpl<$Res>;
+abstract class $WeatherStateCopyWith<$Res> {
+  factory $WeatherStateCopyWith(
+          WeatherState value, $Res Function(WeatherState) then) =
+      _$WeatherStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$WeatherNewStateCopyWithImpl<$Res>
-    implements $WeatherNewStateCopyWith<$Res> {
-  _$WeatherNewStateCopyWithImpl(this._value, this._then);
+class _$WeatherStateCopyWithImpl<$Res> implements $WeatherStateCopyWith<$Res> {
+  _$WeatherStateCopyWithImpl(this._value, this._then);
 
-  final WeatherNewState _value;
+  final WeatherState _value;
   // ignore: unused_field
-  final $Res Function(WeatherNewState) _then;
+  final $Res Function(WeatherState) _then;
 }
 
 /// @nodoc
@@ -665,7 +663,7 @@ abstract class $WeatherFetchSuccessCopyWith<$Res> {
 
 /// @nodoc
 class _$WeatherFetchSuccessCopyWithImpl<$Res>
-    extends _$WeatherNewStateCopyWithImpl<$Res>
+    extends _$WeatherStateCopyWithImpl<$Res>
     implements $WeatherFetchSuccessCopyWith<$Res> {
   _$WeatherFetchSuccessCopyWithImpl(
       WeatherFetchSuccess _value, $Res Function(WeatherFetchSuccess) _then)
@@ -711,7 +709,7 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
 
   @override
   String toString() {
-    return 'WeatherNewState.weatherFetchSuccess(weather: $weather)';
+    return 'WeatherState.weatherFetchSuccess(weather: $weather)';
   }
 
   @override
@@ -814,7 +812,7 @@ class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   }
 }
 
-abstract class WeatherFetchSuccess implements WeatherNewState {
+abstract class WeatherFetchSuccess implements WeatherState {
   const factory WeatherFetchSuccess({required Weather weather}) =
       _$WeatherFetchSuccess;
 
@@ -837,7 +835,7 @@ abstract class $WeatherLocalisationFetchInProgressCopyWith<$Res> {
 
 /// @nodoc
 class _$WeatherLocalisationFetchInProgressCopyWithImpl<$Res>
-    extends _$WeatherNewStateCopyWithImpl<$Res>
+    extends _$WeatherStateCopyWithImpl<$Res>
     implements $WeatherLocalisationFetchInProgressCopyWith<$Res> {
   _$WeatherLocalisationFetchInProgressCopyWithImpl(
       WeatherLocalisationFetchInProgress _value,
@@ -865,7 +863,7 @@ class _$WeatherLocalisationFetchInProgress
 
   @override
   String toString() {
-    return 'WeatherNewState.weatherLocalisationFetchInProgress()';
+    return 'WeatherState.weatherLocalisationFetchInProgress()';
   }
 
   @override
@@ -962,7 +960,7 @@ class _$WeatherLocalisationFetchInProgress
   }
 }
 
-abstract class WeatherLocalisationFetchInProgress implements WeatherNewState {
+abstract class WeatherLocalisationFetchInProgress implements WeatherState {
   const factory WeatherLocalisationFetchInProgress() =
       _$WeatherLocalisationFetchInProgress;
 
@@ -981,7 +979,7 @@ abstract class $WeatherFetchInProgressCopyWith<$Res> {
 
 /// @nodoc
 class _$WeatherFetchInProgressCopyWithImpl<$Res>
-    extends _$WeatherNewStateCopyWithImpl<$Res>
+    extends _$WeatherStateCopyWithImpl<$Res>
     implements $WeatherFetchInProgressCopyWith<$Res> {
   _$WeatherFetchInProgressCopyWithImpl(WeatherFetchInProgress _value,
       $Res Function(WeatherFetchInProgress) _then)
@@ -1020,7 +1018,7 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
 
   @override
   String toString() {
-    return 'WeatherNewState.weatherFetchInProgress(cityName: $cityName)';
+    return 'WeatherState.weatherFetchInProgress(cityName: $cityName)';
   }
 
   @override
@@ -1125,7 +1123,7 @@ class _$WeatherFetchInProgress implements WeatherFetchInProgress {
   }
 }
 
-abstract class WeatherFetchInProgress implements WeatherNewState {
+abstract class WeatherFetchInProgress implements WeatherState {
   const factory WeatherFetchInProgress({required String cityName}) =
       _$WeatherFetchInProgress;
 
@@ -1148,7 +1146,7 @@ abstract class $WeatherFetchFailureCopyWith<$Res> {
 
 /// @nodoc
 class _$WeatherFetchFailureCopyWithImpl<$Res>
-    extends _$WeatherNewStateCopyWithImpl<$Res>
+    extends _$WeatherStateCopyWithImpl<$Res>
     implements $WeatherFetchFailureCopyWith<$Res> {
   _$WeatherFetchFailureCopyWithImpl(
       WeatherFetchFailure _value, $Res Function(WeatherFetchFailure) _then)
@@ -1187,7 +1185,7 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
 
   @override
   String toString() {
-    return 'WeatherNewState.weatherFetchFailure(error: $error)';
+    return 'WeatherState.weatherFetchFailure(error: $error)';
   }
 
   @override
@@ -1291,7 +1289,7 @@ class _$WeatherFetchFailure implements WeatherFetchFailure {
   }
 }
 
-abstract class WeatherFetchFailure implements WeatherNewState {
+abstract class WeatherFetchFailure implements WeatherState {
   const factory WeatherFetchFailure({required Object error}) =
       _$WeatherFetchFailure;
 

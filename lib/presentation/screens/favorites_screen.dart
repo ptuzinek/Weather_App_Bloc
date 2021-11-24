@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app_bloc/business_logic/blocs/weather_new_bloc/weather_new_bloc.dart';
-import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_app_bloc/business_logic/cubits/favorite_cities_cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -116,7 +116,7 @@ class FavoriteListPopulated extends StatelessWidget {
                   '${favoriteCitiesWeather[index].calculateCelsius(currentWeather.temperature)}°C',
                   style: TextStyle(color: Colors.grey[300])),
               onTap: () {
-                context.read<WeatherNewBloc>().add(FavoriteCityWeatherRequested(
+                context.read<WeatherBloc>().add(FavoriteCityWeatherRequested(
                     weather: favoriteCitiesWeather[index]));
                 Navigator.pop(context);
               },
