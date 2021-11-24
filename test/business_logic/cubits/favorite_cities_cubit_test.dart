@@ -1,78 +1,63 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app_bloc/business_logic/cubits/cubit/favorite_cities_cubit.dart';
+import 'package:weather_app_bloc/data/constants/city_names.dart';
 import 'package:weather_app_bloc/data/models/hour_weather.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 
-class MockStorage extends Mock implements Storage {}
-
-late Storage hydratedStorage;
-
-void initHydratedBloc() {
-  TestWidgetsFlutterBinding.ensureInitialized();
-  hydratedStorage = MockStorage();
-  when(() => hydratedStorage.write(any(), any<dynamic>()))
-      .thenAnswer((_) async {});
-  HydratedBloc.storage = hydratedStorage;
-}
+import '../../helpers/hydrated_bloc.dart';
 
 class MockWeatherRepository extends Mock implements WeatherRepository {}
 
+const weatherHourlyList = [
+  const HourWeather(
+    timeStamp: 1618317040,
+    weatherIconId: '10d',
+    temperature: 284.07,
+    windSpeed: 6,
+    cloudiness: 0,
+    pressure: 1019,
+    weatherDescription: "few clouds",
+  )
+];
+
+const weather = Weather(
+  lat: 33.44,
+  lon: -94.04,
+  cityName: 'Chicago',
+  weatherHourlyList: weatherHourlyList,
+  timezoneOffset: -21600,
+);
+
 void main() {
   group('FavoriteCitiesCubit', () {
-    late Weather weather;
     late MockWeatherRepository weatherRepository;
-    late FavoriteCitiesCubit favoriteCitiesCubit;
+    final favoriteCitiesList = [weather];
 
     setUp(() {
-      initHydratedBloc();
-
-      List<HourWeather> weatherHourlyList = [
-        HourWeather(
-          timeStamp: 1618317040,
-          weatherIconId: '10d',
-          temperature: 284.07,
-          windSpeed: 6,
-          cloudiness: 0,
-          pressure: 1019,
-          weatherDescription: "few clouds",
-        )
-      ];
-
-      weather = Weather(
-        lat: 33.44,
-        lon: -94.04,
-        cityName: 'Chicago',
-        weatherHourlyList: weatherHourlyList,
-        timezoneOffset: -21600,
-      );
-
-      final favoriteCitiesList = [weather];
-
       weatherRepository = MockWeatherRepository();
       when(() => weatherRepository.getFavoriteCitiesWeather())
           .thenAnswer((_) async => favoriteCitiesList);
-
-      favoriteCitiesCubit =
-          FavoriteCitiesCubit(weatherRepository: weatherRepository);
     });
 
     test(
         'The initial state for the FavoriteCitiesCubit is FavoriteCitiesInitial',
-        () async {
-      expect(
-          FavoriteCitiesCubit(weatherRepository: MockWeatherRepository()).state,
-          FavoriteCitiesInitial());
+        () {
+      mockHydratedStorage(() {
+        final favoritesCubit =
+            FavoriteCitiesCubit(weatherRepository: weatherRepository);
+        expect(favoritesCubit.state, FavoriteCitiesInitial());
+      });
     });
 
     blocTest(
       'The cubit should emit a FavoriteCitiesFetchSuccess with '
       'a list of Weather objects that are in the database when getFavoriteCitiesList method is called',
-      build: () =>
-          favoriteCitiesCubit, // current instance of a Cubit to make it available for testing
+      build: () => mockHydratedStorage(
+        () => FavoriteCitiesCubit(weatherRepository: weatherRepository),
+      ), // current instance of a Cubit to make it available for testing
       act: (FavoriteCitiesCubit cubit) =>
           cubit.getFavoriteCitiesList(), // takes the cubit and acts on it
       expect: () => [
@@ -84,8 +69,9 @@ void main() {
     blocTest(
       'More speciffic test: The cubit should emit a FavoriteCitiesFetchSuccess with '
       'a list of Weather objects that are in the database when getFavoriteCitiesList method is called',
-      build: () =>
-          favoriteCitiesCubit, // current instance of a Cubit to make it available for testing
+      build: () => mockHydratedStorage(
+        () => FavoriteCitiesCubit(weatherRepository: weatherRepository),
+      ), // current instance of a Cubit to make it available for testing
       act: (FavoriteCitiesCubit cubit) =>
           cubit.getFavoriteCitiesList(), // takes the cubit and acts on it
       expect: () => [
@@ -98,7 +84,78 @@ void main() {
     );
 
     // Add to favorites
+    blocTest(
+      'Cubit emits a FavoriteCitiesFetchSuccess when addCityToFavorite is called. ',
+      setUp: () {
+        when(() => weatherRepository.addFavoriteCity('Chicago'))
+            .thenAnswer((_) async => favoriteCitiesList);
+      },
+      build: () => mockHydratedStorage(
+        () => FavoriteCitiesCubit(weatherRepository: weatherRepository),
+      ),
+      act: (FavoriteCitiesCubit cubit) => cubit.addCityToFavorite('Chicago'),
+      expect: () => [
+        FavoriteCitiesFetchSuccess(favoriteCitiesWeather: [weather]),
+      ],
+    );
 
     // Remove from favorites
+    blocTest(
+      'Cubit emits a FavoriteCitiesInitial when empty list is returned from the repository after removeCityFromFavorites. ',
+      setUp: () {
+        when(() => weatherRepository.getFavoriteCitiesWeather())
+            .thenAnswer((_) async => []);
+      },
+      build: () => mockHydratedStorage(
+        () => FavoriteCitiesCubit(weatherRepository: weatherRepository),
+      ),
+      act: (FavoriteCitiesCubit cubit) => cubit.getFavoriteCitiesList(),
+      expect: () => [
+        FavoriteCitiesInitial(),
+      ],
+    );
+
+    blocTest(
+      'Cubit emits a FavoriteCitiesInitial when empty list is returned from the repository after removeCityFromFavorites. ',
+      build: () => mockHydratedStorage(
+        () => FavoriteCitiesCubit(weatherRepository: weatherRepository),
+      ),
+      act: (FavoriteCitiesCubit cubit) => cubit.getFavoriteCitiesList(),
+      expect: () => [
+        FavoriteCitiesFetchSuccess(favoriteCitiesWeather: [weather]),
+      ],
+    );
+
+    // Empty list, return Initial state.
+    blocTest(
+      'The cubit emits a FavoriteCitiesInitial when empty list is returned from the repository. ',
+      setUp: () {
+        final List<Weather> favoriteCitiesList = [];
+        when(() => weatherRepository.getFavoriteCitiesWeather())
+            .thenAnswer((_) async => favoriteCitiesList);
+      },
+      build: () => mockHydratedStorage(
+        () => FavoriteCitiesCubit(weatherRepository: weatherRepository),
+      ),
+      act: (FavoriteCitiesCubit cubit) => cubit.getFavoriteCitiesList(),
+      expect: () => [
+        FavoriteCitiesInitial(),
+      ],
+    );
+
+    // Emits Failure when getFavoriteCitiesWeather throws
+    blocTest(
+      'The cubit emits a FavoriteCitiesFetchFailure when getFavoriteCitiesWeather throws. ',
+      setUp: () {
+        when(() => weatherRepository.getFavoriteCitiesWeather())
+            .thenThrow((_) async => Exception('error'));
+      },
+      build: () => mockHydratedStorage(
+          () => FavoriteCitiesCubit(weatherRepository: weatherRepository)),
+      act: (FavoriteCitiesCubit cubit) => cubit.getFavoriteCitiesList(),
+      expect: () => [
+        isA<FavoriteCitiesFetchFailure>(),
+      ],
+    );
   });
 }
