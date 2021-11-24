@@ -6,7 +6,7 @@ part 'hour_weather.g.dart';
 
 @freezed
 class HourWeather with _$HourWeather {
-  factory HourWeather({
+  const factory HourWeather({
     required int timeStamp,
     required double temperature,
     required double windSpeed,

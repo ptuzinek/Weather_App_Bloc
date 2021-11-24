@@ -9,7 +9,7 @@ part 'weather.g.dart';
 class Weather with _$Weather {
   const Weather._();
 
-  factory Weather({
+  const factory Weather({
     required double lat,
     required double lon,
     required String cityName,

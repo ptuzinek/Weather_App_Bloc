@@ -168,7 +168,7 @@ class __$WeatherCopyWithImpl<$Res> extends _$WeatherCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Weather extends _Weather with DiagnosticableTreeMixin {
-  _$_Weather(
+  const _$_Weather(
       {required this.lat,
       required this.lon,
       required this.cityName,
@@ -238,13 +238,13 @@ class _$_Weather extends _Weather with DiagnosticableTreeMixin {
 }
 
 abstract class _Weather extends Weather {
-  factory _Weather(
+  const factory _Weather(
       {required double lat,
       required double lon,
       required String cityName,
       required int timezoneOffset,
       required List<HourWeather> weatherHourlyList}) = _$_Weather;
-  _Weather._() : super._();
+  const _Weather._() : super._();
 
   factory _Weather.fromJson(Map<String, dynamic> json) = _$_Weather.fromJson;
 

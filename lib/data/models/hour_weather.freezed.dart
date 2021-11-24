@@ -203,7 +203,7 @@ class __$HourWeatherCopyWithImpl<$Res> extends _$HourWeatherCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_HourWeather with DiagnosticableTreeMixin implements _HourWeather {
-  _$_HourWeather(
+  const _$_HourWeather(
       {required this.timeStamp,
       required this.temperature,
       required this.windSpeed,
@@ -286,7 +286,7 @@ class _$_HourWeather with DiagnosticableTreeMixin implements _HourWeather {
 }
 
 abstract class _HourWeather implements HourWeather {
-  factory _HourWeather(
+  const factory _HourWeather(
       {required int timeStamp,
       required double temperature,
       required double windSpeed,
