@@ -147,13 +147,13 @@ void main() {
       'The cubit emits a FavoriteCitiesFetchFailure when getFavoriteCitiesWeather throws. ',
       setUp: () {
         when(() => weatherRepository.getFavoriteCitiesWeather())
-            .thenThrow((_) async => Exception('error'));
+            .thenThrow('error');
       },
       build: () => mockHydratedStorage(
           () => FavoriteCitiesCubit(weatherRepository: weatherRepository)),
       act: (FavoriteCitiesCubit cubit) => cubit.getFavoriteCitiesList(),
       expect: () => [
-        isA<FavoriteCitiesFetchFailure>(),
+        FavoriteCitiesFetchFailure(error: 'error'),
       ],
     );
   });
