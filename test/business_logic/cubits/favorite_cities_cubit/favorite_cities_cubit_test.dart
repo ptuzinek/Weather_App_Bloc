@@ -6,7 +6,7 @@ import 'package:weather_app_bloc/data/models/hour_weather.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 
-import '../../helpers/hydrated_bloc.dart';
+import '../../../helpers/hydrated_bloc.dart';
 
 class MockWeatherRepository extends Mock implements WeatherRepository {}
 
