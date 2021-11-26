@@ -9,6 +9,7 @@ part 'weather.g.dart';
 class Weather with _$Weather {
   const Weather._();
 
+  @JsonSerializable(explicitToJson: true)
   const factory Weather({
     required double lat,
     required double lon,

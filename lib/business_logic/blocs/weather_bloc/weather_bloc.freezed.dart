@@ -693,7 +693,8 @@ class _$WeatherFetchSuccessCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$WeatherFetchSuccess implements WeatherFetchSuccess {
   const _$WeatherFetchSuccess({required this.weather, String? $type})
       : $type = $type ?? 'weatherFetchSuccess';

@@ -16,7 +16,7 @@ _$WeatherFetchSuccess _$$WeatherFetchSuccessFromJson(
 Map<String, dynamic> _$$WeatherFetchSuccessToJson(
         _$WeatherFetchSuccess instance) =>
     <String, dynamic>{
-      'weather': instance.weather,
+      'weather': instance.weather.toJson(),
       'type': instance.$type,
     };
 

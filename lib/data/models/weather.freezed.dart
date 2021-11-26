@@ -166,7 +166,8 @@ class __$WeatherCopyWithImpl<$Res> extends _$WeatherCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Weather extends _Weather with DiagnosticableTreeMixin {
   const _$_Weather(
       {required this.lat,

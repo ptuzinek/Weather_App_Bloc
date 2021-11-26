@@ -22,5 +22,6 @@ Map<String, dynamic> _$$_WeatherToJson(_$_Weather instance) =>
       'lon': instance.lon,
       'cityName': instance.cityName,
       'timezoneOffset': instance.timezoneOffset,
-      'weatherHourlyList': instance.weatherHourlyList,
+      'weatherHourlyList':
+          instance.weatherHourlyList.map((e) => e.toJson()).toList(),
     };

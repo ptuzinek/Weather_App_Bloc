@@ -2,6 +2,7 @@ part of 'weather_bloc.dart';
 
 @freezed
 class WeatherState with _$WeatherState {
+  @JsonSerializable(explicitToJson: true)
   const factory WeatherState.weatherFetchSuccess({
     required Weather weather,
   }) = WeatherFetchSuccess;
