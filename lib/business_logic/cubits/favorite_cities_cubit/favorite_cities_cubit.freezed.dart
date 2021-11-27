@@ -478,7 +478,8 @@ class _$FavoriteCitiesFetchSuccessCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$FavoriteCitiesFetchSuccess implements FavoriteCitiesFetchSuccess {
   const _$FavoriteCitiesFetchSuccess(
       {required this.favoriteCitiesWeather, String? $type})

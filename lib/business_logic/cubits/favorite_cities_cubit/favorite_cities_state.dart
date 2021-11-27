@@ -8,6 +8,7 @@ class FavoriteCitiesState with _$FavoriteCitiesState {
   const factory FavoriteCitiesState.favoriteCitiesFetchInProgress() =
       FavoriteCitiesFetchInProgress;
 
+  @JsonSerializable(explicitToJson: true)
   const factory FavoriteCitiesState.favoriteCitiesFetchSuccess({
     required List<Weather> favoriteCitiesWeather,
   }) = FavoriteCitiesFetchSuccess;

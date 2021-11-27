@@ -42,7 +42,8 @@ _$FavoriteCitiesFetchSuccess _$$FavoriteCitiesFetchSuccessFromJson(
 Map<String, dynamic> _$$FavoriteCitiesFetchSuccessToJson(
         _$FavoriteCitiesFetchSuccess instance) =>
     <String, dynamic>{
-      'favoriteCitiesWeather': instance.favoriteCitiesWeather,
+      'favoriteCitiesWeather':
+          instance.favoriteCitiesWeather.map((e) => e.toJson()).toList(),
       'type': instance.$type,
     };
 
