@@ -106,6 +106,7 @@ class FavoriteListPopulated extends StatelessWidget {
               ),
             ],
             child: ListTile(
+              key: ValueKey('listTileTap$index'),
               tileColor: Color(0xFF889EAF), // Color(0xFF464660),
               contentPadding: EdgeInsets.symmetric(horizontal: 20),
               trailing: Image.asset(
