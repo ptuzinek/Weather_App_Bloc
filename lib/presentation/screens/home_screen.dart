@@ -249,6 +249,7 @@ class BottomMenu extends StatelessWidget {
             children: [
               Flexible(
                 child: IconButton(
+                  key: ValueKey('search'),
                   onPressed: () {
                     Navigator.pushNamed(context, '/search');
                   },
@@ -260,6 +261,7 @@ class BottomMenu extends StatelessWidget {
               ),
               Flexible(
                 child: IconButton(
+                  key: ValueKey('list'),
                   onPressed: () {
                     BlocProvider.of<FavoriteCitiesCubit>(context)
                         .getFavoriteCitiesList();
