@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/favorite_cities_cubit/favorite_cities_cubit.dart';
@@ -182,8 +183,10 @@ void main() {
           home: HomeScreen(),
         ),
       ));
+      // tap list IconButton in HomeScreen
       await tester.tap(find.byKey(ValueKey('list')));
       await tester.pumpAndSettle();
+      // tap list ListTile in FavoritesScreen
       await tester.tap(find.byKey(ValueKey('listTileTap0')));
       await tester.pumpAndSettle();
 
@@ -191,7 +194,40 @@ void main() {
     });
 
     // removes element on slide and tap
-    testWidgets('Calls removeCityFromFavorites when delete icon is tapped',
-        (tester) async {});
+    testWidgets('Removes ListTile when delete icon is tapped', (tester) async {
+      when(() => favoritesCubit.state).thenReturn(FavoriteCitiesFetchSuccess(
+          favoriteCitiesWeather: favoriteCitiesList));
+      when(() => favoritesCubit.stream).thenAnswer((_) => Stream.fromIterable([
+            FavoriteCitiesFetchSuccess(
+                favoriteCitiesWeather: favoriteCitiesList)
+          ]));
+      when(() => weatherRepository.removeFavoriteCity(weather.cityName))
+          .thenAnswer((_) async {});
+      final storage = MockStorage();
+      final Map<String, dynamic> jsonRead =
+          FavoriteCitiesFetchSuccess(favoriteCitiesWeather: favoriteCitiesList)
+              .toJson();
+      when<dynamic>(() => storage.read('FavoriteCitiesCubit'))
+          .thenReturn(jsonRead);
+      when(() => storage.write(any(), any<dynamic>())).thenAnswer((_) async {});
+
+      await mockHydratedStorage(
+        () async {
+          await tester.pumpWidget(BlocProvider.value(
+            value: FavoriteCitiesCubit(weatherRepository: weatherRepository),
+            child: MaterialApp(
+              onGenerateRoute: AppRouter().onGenerateRoute,
+              home: FavoritesScreen(),
+            ),
+          ));
+          await tester.drag(find.byType(Slidable), Offset(-500, 0));
+          await tester.pump();
+          await tester.tap(find.byKey(ValueKey('IconSlideAction0')));
+        },
+        storage: storage,
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(ListTile), findsNothing);
+    });
   });
 }
