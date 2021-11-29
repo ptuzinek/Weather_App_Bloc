@@ -95,6 +95,7 @@ class FavoriteListPopulated extends StatelessWidget {
             actionExtentRatio: 0.25,
             secondaryActions: [
               IconSlideAction(
+                key: ValueKey('IconSlideAction$index'),
                 caption: 'Delete',
                 color: Colors.red,
                 icon: Icons.delete,
