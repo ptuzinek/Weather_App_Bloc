@@ -12,6 +12,7 @@ import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
 import 'package:weather_app_bloc/presentation/router/app_router.dart';
 import 'package:weather_app_bloc/presentation/screens/home_screen.dart';
 
+// Comment for testing CI
 void main() async {
   FlutterServicesBinding.ensureInitialized();
 
