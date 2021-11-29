@@ -64,6 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           Flexible(
                             flex: 2,
                             child: TypeAheadFormField<CitySuggestion>(
+                              key: ValueKey('TextField'),
                               suggestionsBoxVerticalOffset: 15,
                               suggestionsBoxDecoration:
                                   SuggestionsBoxDecoration(
@@ -171,6 +172,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 0),
                               child: MaterialButton(
+                                key: ValueKey('cancelButton'),
                                 child: Text('Cancel'),
                                 onPressed: () {
                                   Navigator.pop(context);
