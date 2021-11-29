@@ -155,7 +155,6 @@ void main() {
       when(() => favoritesCubit.state).thenReturn(FavoriteCitiesInitial());
       when(() => favoritesCubit.getFavoriteCitiesList())
           .thenAnswer((_) async => {});
-      ;
 
       await tester.pumpWidget(MultiBlocProvider(
         providers: [
