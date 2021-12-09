@@ -1,6 +1,6 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:weather_app_bloc/data/api/models/daily_and_hourly_weather.dart';
 import 'package:weather_app_bloc/data/api/models/location_response.dart';
-import 'package:weather_app_bloc/data/api/models/weather_hourly_response.dart';
 import 'package:weather_app_bloc/data/api/open_weather_api_client.dart';
 import 'package:weather_app_bloc/data/data_providers/favorite_cities_provider.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
@@ -21,12 +21,14 @@ class WeatherRepository {
     final LocationResponse location =
         await weatherApiClient.getCityLocation(cityName);
 
-    final WeatherHourlyResponse weatherHourly =
-        await weatherApiClient.getLocationHourlyForcast(
+    final FullWeatherResponse fullWeatherResponse =
+        await weatherApiClient.getLocationDailyAndHourlyForcast(
             location.coordinates.lat, location.coordinates.lon);
 
     final Weather weather = WeatherMapper.mapWeather(
-        locationResponse: location, weatherHourlyResponse: weatherHourly);
+        locationResponse: location,
+        weatherHourlyResponse: fullWeatherResponse.weatherHourlyResponse,
+        weatherDailyResponse: fullWeatherResponse.weatherDailyResponse);
 
     return weather;
   }
@@ -35,11 +37,15 @@ class WeatherRepository {
     final Position position = await weatherApiClient.getLocation();
     final LocationResponse location = await weatherApiClient.getLocationInfo(
         position.latitude, position.latitude);
-    final WeatherHourlyResponse weatherHourly = await weatherApiClient
-        .getLocationHourlyForcast(position.latitude, position.longitude);
+
+    final FullWeatherResponse fullWeatherResponse =
+        await weatherApiClient.getLocationDailyAndHourlyForcast(
+            location.coordinates.lat, location.coordinates.lon);
 
     final Weather weather = WeatherMapper.mapWeather(
-        locationResponse: location, weatherHourlyResponse: weatherHourly);
+        locationResponse: location,
+        weatherHourlyResponse: fullWeatherResponse.weatherHourlyResponse,
+        weatherDailyResponse: fullWeatherResponse.weatherDailyResponse);
 
     return weather;
   }
