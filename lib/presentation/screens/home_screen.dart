@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/favorite_cities_cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
+import 'package:weather_app_bloc/presentation/widgets/daily_forecast.dart';
 import 'package:weather_app_bloc/presentation/widgets/slider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -193,10 +194,9 @@ class WeatherContent extends StatelessWidget {
     final currentWeather = weather.weatherHourlyList[0];
     return SliverList(
         delegate: SliverChildListDelegate.fixed([
-      WeatherSlider(
-        weather: weather,
-      ),
-      //TODO - Implement WeatherContent UI
+      WeatherSlider(weather: weather),
+      DailyForecast(weather: weather),
+      //TODO - Implement Current Weather info UI
       SizedBox(
         height: 100,
       ),

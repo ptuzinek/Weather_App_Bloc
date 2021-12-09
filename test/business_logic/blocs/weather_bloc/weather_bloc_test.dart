@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_app_bloc/data/models/day_weather.dart';
 import 'package:weather_app_bloc/data/models/hour_weather.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/data/repositories/weather_repository.dart';
@@ -22,12 +23,22 @@ const weatherHourlyList = [
   )
 ];
 
+const weatherDailyList = [
+  const DayWeather(
+    dayTemperature: 279.79,
+    nightTemperature: 275.09,
+    precipitationProbability: 0.2,
+    weatherIconId: '10d',
+  )
+];
+
 const weather = Weather(
   lat: 33.44,
   lon: -94.04,
   cityName: 'Chicago',
   weatherHourlyList: weatherHourlyList,
   timezoneOffset: -21600,
+  weatherDailyList: weatherDailyList,
 );
 
 void main() {

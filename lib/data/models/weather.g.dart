@@ -14,6 +14,9 @@ _$_Weather _$$_WeatherFromJson(Map<String, dynamic> json) => _$_Weather(
       weatherHourlyList: (json['weatherHourlyList'] as List<dynamic>)
           .map((e) => HourWeather.fromJson(e as Map<String, dynamic>))
           .toList(),
+      weatherDailyList: (json['weatherDailyList'] as List<dynamic>)
+          .map((e) => DayWeather.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_WeatherToJson(_$_Weather instance) =>
@@ -24,4 +27,6 @@ Map<String, dynamic> _$$_WeatherToJson(_$_Weather instance) =>
       'timezoneOffset': instance.timezoneOffset,
       'weatherHourlyList':
           instance.weatherHourlyList.map((e) => e.toJson()).toList(),
+      'weatherDailyList':
+          instance.weatherDailyList.map((e) => e.toJson()).toList(),
     };

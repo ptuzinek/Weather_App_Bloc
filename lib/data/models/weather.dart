@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:weather_app_bloc/data/models/day_weather.dart';
 import 'package:weather_app_bloc/data/models/hour_weather.dart';
 
 part 'weather.freezed.dart';
@@ -16,6 +17,7 @@ class Weather with _$Weather {
     required String cityName,
     required int timezoneOffset,
     required List<HourWeather> weatherHourlyList,
+    required List<DayWeather> weatherDailyList,
   }) = _Weather;
 
   factory Weather.fromJson(Map<String, dynamic> json) =>

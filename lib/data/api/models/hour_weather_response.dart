@@ -16,6 +16,10 @@ class WeatherResponse with _$WeatherResponse {
       _$WeatherResponseFromJson(json);
 }
 
+// ['hourly']['index']['temp']
+// ['hourly']['index']['weather'][0]['id']
+// ['hourly']['index']['weather'][0]['description']
+// ['hourly']['index']['weather'][0]['icon']
 @freezed
 class HourWeatherResponse with _$HourWeatherResponse {
   factory HourWeatherResponse({

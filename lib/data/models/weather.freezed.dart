@@ -26,13 +26,15 @@ class _$WeatherTearOff {
       required double lon,
       required String cityName,
       required int timezoneOffset,
-      required List<HourWeather> weatherHourlyList}) {
+      required List<HourWeather> weatherHourlyList,
+      required List<DayWeather> weatherDailyList}) {
     return _Weather(
       lat: lat,
       lon: lon,
       cityName: cityName,
       timezoneOffset: timezoneOffset,
       weatherHourlyList: weatherHourlyList,
+      weatherDailyList: weatherDailyList,
     );
   }
 
@@ -51,6 +53,7 @@ mixin _$Weather {
   String get cityName => throw _privateConstructorUsedError;
   int get timezoneOffset => throw _privateConstructorUsedError;
   List<HourWeather> get weatherHourlyList => throw _privateConstructorUsedError;
+  List<DayWeather> get weatherDailyList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +69,8 @@ abstract class $WeatherCopyWith<$Res> {
       double lon,
       String cityName,
       int timezoneOffset,
-      List<HourWeather> weatherHourlyList});
+      List<HourWeather> weatherHourlyList,
+      List<DayWeather> weatherDailyList});
 }
 
 /// @nodoc
@@ -84,6 +88,7 @@ class _$WeatherCopyWithImpl<$Res> implements $WeatherCopyWith<$Res> {
     Object? cityName = freezed,
     Object? timezoneOffset = freezed,
     Object? weatherHourlyList = freezed,
+    Object? weatherDailyList = freezed,
   }) {
     return _then(_value.copyWith(
       lat: lat == freezed
@@ -106,6 +111,10 @@ class _$WeatherCopyWithImpl<$Res> implements $WeatherCopyWith<$Res> {
           ? _value.weatherHourlyList
           : weatherHourlyList // ignore: cast_nullable_to_non_nullable
               as List<HourWeather>,
+      weatherDailyList: weatherDailyList == freezed
+          ? _value.weatherDailyList
+          : weatherDailyList // ignore: cast_nullable_to_non_nullable
+              as List<DayWeather>,
     ));
   }
 }
@@ -120,7 +129,8 @@ abstract class _$WeatherCopyWith<$Res> implements $WeatherCopyWith<$Res> {
       double lon,
       String cityName,
       int timezoneOffset,
-      List<HourWeather> weatherHourlyList});
+      List<HourWeather> weatherHourlyList,
+      List<DayWeather> weatherDailyList});
 }
 
 /// @nodoc
@@ -139,6 +149,7 @@ class __$WeatherCopyWithImpl<$Res> extends _$WeatherCopyWithImpl<$Res>
     Object? cityName = freezed,
     Object? timezoneOffset = freezed,
     Object? weatherHourlyList = freezed,
+    Object? weatherDailyList = freezed,
   }) {
     return _then(_Weather(
       lat: lat == freezed
@@ -161,6 +172,10 @@ class __$WeatherCopyWithImpl<$Res> extends _$WeatherCopyWithImpl<$Res>
           ? _value.weatherHourlyList
           : weatherHourlyList // ignore: cast_nullable_to_non_nullable
               as List<HourWeather>,
+      weatherDailyList: weatherDailyList == freezed
+          ? _value.weatherDailyList
+          : weatherDailyList // ignore: cast_nullable_to_non_nullable
+              as List<DayWeather>,
     ));
   }
 }
@@ -174,7 +189,8 @@ class _$_Weather extends _Weather with DiagnosticableTreeMixin {
       required this.lon,
       required this.cityName,
       required this.timezoneOffset,
-      required this.weatherHourlyList})
+      required this.weatherHourlyList,
+      required this.weatherDailyList})
       : super._();
 
   factory _$_Weather.fromJson(Map<String, dynamic> json) =>
@@ -190,10 +206,12 @@ class _$_Weather extends _Weather with DiagnosticableTreeMixin {
   final int timezoneOffset;
   @override
   final List<HourWeather> weatherHourlyList;
+  @override
+  final List<DayWeather> weatherDailyList;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Weather(lat: $lat, lon: $lon, cityName: $cityName, timezoneOffset: $timezoneOffset, weatherHourlyList: $weatherHourlyList)';
+    return 'Weather(lat: $lat, lon: $lon, cityName: $cityName, timezoneOffset: $timezoneOffset, weatherHourlyList: $weatherHourlyList, weatherDailyList: $weatherDailyList)';
   }
 
   @override
@@ -205,7 +223,8 @@ class _$_Weather extends _Weather with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('lon', lon))
       ..add(DiagnosticsProperty('cityName', cityName))
       ..add(DiagnosticsProperty('timezoneOffset', timezoneOffset))
-      ..add(DiagnosticsProperty('weatherHourlyList', weatherHourlyList));
+      ..add(DiagnosticsProperty('weatherHourlyList', weatherHourlyList))
+      ..add(DiagnosticsProperty('weatherDailyList', weatherDailyList));
   }
 
   @override
@@ -220,12 +239,20 @@ class _$_Weather extends _Weather with DiagnosticableTreeMixin {
             (identical(other.timezoneOffset, timezoneOffset) ||
                 other.timezoneOffset == timezoneOffset) &&
             const DeepCollectionEquality()
-                .equals(other.weatherHourlyList, weatherHourlyList));
+                .equals(other.weatherHourlyList, weatherHourlyList) &&
+            const DeepCollectionEquality()
+                .equals(other.weatherDailyList, weatherDailyList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, lat, lon, cityName,
-      timezoneOffset, const DeepCollectionEquality().hash(weatherHourlyList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      lat,
+      lon,
+      cityName,
+      timezoneOffset,
+      const DeepCollectionEquality().hash(weatherHourlyList),
+      const DeepCollectionEquality().hash(weatherDailyList));
 
   @JsonKey(ignore: true)
   @override
@@ -244,7 +271,8 @@ abstract class _Weather extends Weather {
       required double lon,
       required String cityName,
       required int timezoneOffset,
-      required List<HourWeather> weatherHourlyList}) = _$_Weather;
+      required List<HourWeather> weatherHourlyList,
+      required List<DayWeather> weatherDailyList}) = _$_Weather;
   const _Weather._() : super._();
 
   factory _Weather.fromJson(Map<String, dynamic> json) = _$_Weather.fromJson;
@@ -259,6 +287,8 @@ abstract class _Weather extends Weather {
   int get timezoneOffset;
   @override
   List<HourWeather> get weatherHourlyList;
+  @override
+  List<DayWeather> get weatherDailyList;
   @override
   @JsonKey(ignore: true)
   _$WeatherCopyWith<_Weather> get copyWith =>
