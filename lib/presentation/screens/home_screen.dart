@@ -193,7 +193,6 @@ class WeatherContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentWeather = weather.weatherHourlyList[0];
     return SliverList(
         delegate: SliverChildListDelegate.fixed([
       WeatherSlider(weather: weather),
