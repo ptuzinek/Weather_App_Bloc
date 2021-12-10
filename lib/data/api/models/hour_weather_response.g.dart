@@ -25,10 +25,14 @@ _$_HourWeatherResponse _$$_HourWeatherResponseFromJson(
     _$_HourWeatherResponse(
       timeStamp: json['dt'] as int,
       temperature: (json['temp'] as num).toDouble(),
-      pressure: json['pressure'] as int,
       cloudiness: json['clouds'] as int,
-      visibility: json['visibility'] as int,
+      precipitationProbability: (json['pop'] as num).toDouble(),
+      humidity: json['humidity'] as int,
       windSpeed: (json['wind_speed'] as num).toDouble(),
+      feelsLike: (json['feels_like'] as num).toDouble(),
+      pressure: json['pressure'] as int,
+      visibility: json['visibility'] as int,
+      uvi: (json['uvi'] as num).toDouble(),
       weather: (json['weather'] as List<dynamic>)
           .map((e) => WeatherResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -39,9 +43,13 @@ Map<String, dynamic> _$$_HourWeatherResponseToJson(
     <String, dynamic>{
       'dt': instance.timeStamp,
       'temp': instance.temperature,
-      'pressure': instance.pressure,
       'clouds': instance.cloudiness,
-      'visibility': instance.visibility,
+      'pop': instance.precipitationProbability,
+      'humidity': instance.humidity,
       'wind_speed': instance.windSpeed,
+      'feels_like': instance.feelsLike,
+      'pressure': instance.pressure,
+      'visibility': instance.visibility,
+      'uvi': instance.uvi,
       'weather': instance.weather,
     };

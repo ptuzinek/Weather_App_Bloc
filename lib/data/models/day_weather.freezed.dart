@@ -25,12 +25,20 @@ class _$DayWeatherTearOff {
       {required double dayTemperature,
       required double nightTemperature,
       required String weatherIconId,
-      required double precipitationProbability}) {
+      required double precipitationProbability,
+      required double minTemperature,
+      required double maxTemperature,
+      required int sunrise,
+      required int sunset}) {
     return _DayWeather(
       dayTemperature: dayTemperature,
       nightTemperature: nightTemperature,
       weatherIconId: weatherIconId,
       precipitationProbability: precipitationProbability,
+      minTemperature: minTemperature,
+      maxTemperature: maxTemperature,
+      sunrise: sunrise,
+      sunset: sunset,
     );
   }
 
@@ -48,6 +56,10 @@ mixin _$DayWeather {
   double get nightTemperature => throw _privateConstructorUsedError;
   String get weatherIconId => throw _privateConstructorUsedError;
   double get precipitationProbability => throw _privateConstructorUsedError;
+  double get minTemperature => throw _privateConstructorUsedError;
+  double get maxTemperature => throw _privateConstructorUsedError;
+  int get sunrise => throw _privateConstructorUsedError;
+  int get sunset => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,7 +76,11 @@ abstract class $DayWeatherCopyWith<$Res> {
       {double dayTemperature,
       double nightTemperature,
       String weatherIconId,
-      double precipitationProbability});
+      double precipitationProbability,
+      double minTemperature,
+      double maxTemperature,
+      int sunrise,
+      int sunset});
 }
 
 /// @nodoc
@@ -81,6 +97,10 @@ class _$DayWeatherCopyWithImpl<$Res> implements $DayWeatherCopyWith<$Res> {
     Object? nightTemperature = freezed,
     Object? weatherIconId = freezed,
     Object? precipitationProbability = freezed,
+    Object? minTemperature = freezed,
+    Object? maxTemperature = freezed,
+    Object? sunrise = freezed,
+    Object? sunset = freezed,
   }) {
     return _then(_value.copyWith(
       dayTemperature: dayTemperature == freezed
@@ -99,6 +119,22 @@ class _$DayWeatherCopyWithImpl<$Res> implements $DayWeatherCopyWith<$Res> {
           ? _value.precipitationProbability
           : precipitationProbability // ignore: cast_nullable_to_non_nullable
               as double,
+      minTemperature: minTemperature == freezed
+          ? _value.minTemperature
+          : minTemperature // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxTemperature: maxTemperature == freezed
+          ? _value.maxTemperature
+          : maxTemperature // ignore: cast_nullable_to_non_nullable
+              as double,
+      sunrise: sunrise == freezed
+          ? _value.sunrise
+          : sunrise // ignore: cast_nullable_to_non_nullable
+              as int,
+      sunset: sunset == freezed
+          ? _value.sunset
+          : sunset // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -113,7 +149,11 @@ abstract class _$DayWeatherCopyWith<$Res> implements $DayWeatherCopyWith<$Res> {
       {double dayTemperature,
       double nightTemperature,
       String weatherIconId,
-      double precipitationProbability});
+      double precipitationProbability,
+      double minTemperature,
+      double maxTemperature,
+      int sunrise,
+      int sunset});
 }
 
 /// @nodoc
@@ -132,6 +172,10 @@ class __$DayWeatherCopyWithImpl<$Res> extends _$DayWeatherCopyWithImpl<$Res>
     Object? nightTemperature = freezed,
     Object? weatherIconId = freezed,
     Object? precipitationProbability = freezed,
+    Object? minTemperature = freezed,
+    Object? maxTemperature = freezed,
+    Object? sunrise = freezed,
+    Object? sunset = freezed,
   }) {
     return _then(_DayWeather(
       dayTemperature: dayTemperature == freezed
@@ -150,6 +194,22 @@ class __$DayWeatherCopyWithImpl<$Res> extends _$DayWeatherCopyWithImpl<$Res>
           ? _value.precipitationProbability
           : precipitationProbability // ignore: cast_nullable_to_non_nullable
               as double,
+      minTemperature: minTemperature == freezed
+          ? _value.minTemperature
+          : minTemperature // ignore: cast_nullable_to_non_nullable
+              as double,
+      maxTemperature: maxTemperature == freezed
+          ? _value.maxTemperature
+          : maxTemperature // ignore: cast_nullable_to_non_nullable
+              as double,
+      sunrise: sunrise == freezed
+          ? _value.sunrise
+          : sunrise // ignore: cast_nullable_to_non_nullable
+              as int,
+      sunset: sunset == freezed
+          ? _value.sunset
+          : sunset // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -161,7 +221,11 @@ class _$_DayWeather with DiagnosticableTreeMixin implements _DayWeather {
       {required this.dayTemperature,
       required this.nightTemperature,
       required this.weatherIconId,
-      required this.precipitationProbability});
+      required this.precipitationProbability,
+      required this.minTemperature,
+      required this.maxTemperature,
+      required this.sunrise,
+      required this.sunset});
 
   factory _$_DayWeather.fromJson(Map<String, dynamic> json) =>
       _$$_DayWeatherFromJson(json);
@@ -174,10 +238,18 @@ class _$_DayWeather with DiagnosticableTreeMixin implements _DayWeather {
   final String weatherIconId;
   @override
   final double precipitationProbability;
+  @override
+  final double minTemperature;
+  @override
+  final double maxTemperature;
+  @override
+  final int sunrise;
+  @override
+  final int sunset;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DayWeather(dayTemperature: $dayTemperature, nightTemperature: $nightTemperature, weatherIconId: $weatherIconId, precipitationProbability: $precipitationProbability)';
+    return 'DayWeather(dayTemperature: $dayTemperature, nightTemperature: $nightTemperature, weatherIconId: $weatherIconId, precipitationProbability: $precipitationProbability, minTemperature: $minTemperature, maxTemperature: $maxTemperature, sunrise: $sunrise, sunset: $sunset)';
   }
 
   @override
@@ -189,7 +261,11 @@ class _$_DayWeather with DiagnosticableTreeMixin implements _DayWeather {
       ..add(DiagnosticsProperty('nightTemperature', nightTemperature))
       ..add(DiagnosticsProperty('weatherIconId', weatherIconId))
       ..add(DiagnosticsProperty(
-          'precipitationProbability', precipitationProbability));
+          'precipitationProbability', precipitationProbability))
+      ..add(DiagnosticsProperty('minTemperature', minTemperature))
+      ..add(DiagnosticsProperty('maxTemperature', maxTemperature))
+      ..add(DiagnosticsProperty('sunrise', sunrise))
+      ..add(DiagnosticsProperty('sunset', sunset));
   }
 
   @override
@@ -205,12 +281,26 @@ class _$_DayWeather with DiagnosticableTreeMixin implements _DayWeather {
                 other.weatherIconId == weatherIconId) &&
             (identical(
                     other.precipitationProbability, precipitationProbability) ||
-                other.precipitationProbability == precipitationProbability));
+                other.precipitationProbability == precipitationProbability) &&
+            (identical(other.minTemperature, minTemperature) ||
+                other.minTemperature == minTemperature) &&
+            (identical(other.maxTemperature, maxTemperature) ||
+                other.maxTemperature == maxTemperature) &&
+            (identical(other.sunrise, sunrise) || other.sunrise == sunrise) &&
+            (identical(other.sunset, sunset) || other.sunset == sunset));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dayTemperature, nightTemperature,
-      weatherIconId, precipitationProbability);
+  int get hashCode => Object.hash(
+      runtimeType,
+      dayTemperature,
+      nightTemperature,
+      weatherIconId,
+      precipitationProbability,
+      minTemperature,
+      maxTemperature,
+      sunrise,
+      sunset);
 
   @JsonKey(ignore: true)
   @override
@@ -228,7 +318,11 @@ abstract class _DayWeather implements DayWeather {
       {required double dayTemperature,
       required double nightTemperature,
       required String weatherIconId,
-      required double precipitationProbability}) = _$_DayWeather;
+      required double precipitationProbability,
+      required double minTemperature,
+      required double maxTemperature,
+      required int sunrise,
+      required int sunset}) = _$_DayWeather;
 
   factory _DayWeather.fromJson(Map<String, dynamic> json) =
       _$_DayWeather.fromJson;
@@ -241,6 +335,14 @@ abstract class _DayWeather implements DayWeather {
   String get weatherIconId;
   @override
   double get precipitationProbability;
+  @override
+  double get minTemperature;
+  @override
+  double get maxTemperature;
+  @override
+  int get sunrise;
+  @override
+  int get sunset;
   @override
   @JsonKey(ignore: true)
   _$DayWeatherCopyWith<_DayWeather> get copyWith =>

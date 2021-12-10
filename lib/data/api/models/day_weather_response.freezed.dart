@@ -188,11 +188,15 @@ class _$TemperatureTearOff {
   const _$TemperatureTearOff();
 
   _Temperature call(
-      {@JsonKey(name: 'day') required double day,
-      @JsonKey(name: 'night') required double night}) {
+      {required double day,
+      required double night,
+      required double min,
+      required double max}) {
     return _Temperature(
       day: day,
       night: night,
+      min: min,
+      max: max,
     );
   }
 
@@ -206,10 +210,10 @@ const $Temperature = _$TemperatureTearOff();
 
 /// @nodoc
 mixin _$Temperature {
-  @JsonKey(name: 'day')
   double get day => throw _privateConstructorUsedError;
-  @JsonKey(name: 'night')
   double get night => throw _privateConstructorUsedError;
+  double get min => throw _privateConstructorUsedError;
+  double get max => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -222,8 +226,7 @@ abstract class $TemperatureCopyWith<$Res> {
   factory $TemperatureCopyWith(
           Temperature value, $Res Function(Temperature) then) =
       _$TemperatureCopyWithImpl<$Res>;
-  $Res call(
-      {@JsonKey(name: 'day') double day, @JsonKey(name: 'night') double night});
+  $Res call({double day, double night, double min, double max});
 }
 
 /// @nodoc
@@ -238,6 +241,8 @@ class _$TemperatureCopyWithImpl<$Res> implements $TemperatureCopyWith<$Res> {
   $Res call({
     Object? day = freezed,
     Object? night = freezed,
+    Object? min = freezed,
+    Object? max = freezed,
   }) {
     return _then(_value.copyWith(
       day: day == freezed
@@ -247,6 +252,14 @@ class _$TemperatureCopyWithImpl<$Res> implements $TemperatureCopyWith<$Res> {
       night: night == freezed
           ? _value.night
           : night // ignore: cast_nullable_to_non_nullable
+              as double,
+      min: min == freezed
+          ? _value.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as double,
+      max: max == freezed
+          ? _value.max
+          : max // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -259,8 +272,7 @@ abstract class _$TemperatureCopyWith<$Res>
           _Temperature value, $Res Function(_Temperature) then) =
       __$TemperatureCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {@JsonKey(name: 'day') double day, @JsonKey(name: 'night') double night});
+  $Res call({double day, double night, double min, double max});
 }
 
 /// @nodoc
@@ -277,6 +289,8 @@ class __$TemperatureCopyWithImpl<$Res> extends _$TemperatureCopyWithImpl<$Res>
   $Res call({
     Object? day = freezed,
     Object? night = freezed,
+    Object? min = freezed,
+    Object? max = freezed,
   }) {
     return _then(_Temperature(
       day: day == freezed
@@ -287,6 +301,14 @@ class __$TemperatureCopyWithImpl<$Res> extends _$TemperatureCopyWithImpl<$Res>
           ? _value.night
           : night // ignore: cast_nullable_to_non_nullable
               as double,
+      min: min == freezed
+          ? _value.min
+          : min // ignore: cast_nullable_to_non_nullable
+              as double,
+      max: max == freezed
+          ? _value.max
+          : max // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -295,22 +317,26 @@ class __$TemperatureCopyWithImpl<$Res> extends _$TemperatureCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Temperature with DiagnosticableTreeMixin implements _Temperature {
   _$_Temperature(
-      {@JsonKey(name: 'day') required this.day,
-      @JsonKey(name: 'night') required this.night});
+      {required this.day,
+      required this.night,
+      required this.min,
+      required this.max});
 
   factory _$_Temperature.fromJson(Map<String, dynamic> json) =>
       _$$_TemperatureFromJson(json);
 
   @override
-  @JsonKey(name: 'day')
   final double day;
   @override
-  @JsonKey(name: 'night')
   final double night;
+  @override
+  final double min;
+  @override
+  final double max;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Temperature(day: $day, night: $night)';
+    return 'Temperature(day: $day, night: $night, min: $min, max: $max)';
   }
 
   @override
@@ -319,7 +345,9 @@ class _$_Temperature with DiagnosticableTreeMixin implements _Temperature {
     properties
       ..add(DiagnosticsProperty('type', 'Temperature'))
       ..add(DiagnosticsProperty('day', day))
-      ..add(DiagnosticsProperty('night', night));
+      ..add(DiagnosticsProperty('night', night))
+      ..add(DiagnosticsProperty('min', min))
+      ..add(DiagnosticsProperty('max', max));
   }
 
   @override
@@ -328,11 +356,13 @@ class _$_Temperature with DiagnosticableTreeMixin implements _Temperature {
         (other.runtimeType == runtimeType &&
             other is _Temperature &&
             (identical(other.day, day) || other.day == day) &&
-            (identical(other.night, night) || other.night == night));
+            (identical(other.night, night) || other.night == night) &&
+            (identical(other.min, min) || other.min == min) &&
+            (identical(other.max, max) || other.max == max));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, day, night);
+  int get hashCode => Object.hash(runtimeType, day, night, min, max);
 
   @JsonKey(ignore: true)
   @override
@@ -347,18 +377,22 @@ class _$_Temperature with DiagnosticableTreeMixin implements _Temperature {
 
 abstract class _Temperature implements Temperature {
   factory _Temperature(
-      {@JsonKey(name: 'day') required double day,
-      @JsonKey(name: 'night') required double night}) = _$_Temperature;
+      {required double day,
+      required double night,
+      required double min,
+      required double max}) = _$_Temperature;
 
   factory _Temperature.fromJson(Map<String, dynamic> json) =
       _$_Temperature.fromJson;
 
   @override
-  @JsonKey(name: 'day')
   double get day;
   @override
-  @JsonKey(name: 'night')
   double get night;
+  @override
+  double get min;
+  @override
+  double get max;
   @override
   @JsonKey(ignore: true)
   _$TemperatureCopyWith<_Temperature> get copyWith =>
@@ -374,10 +408,14 @@ class _$DayWeatherResponseTearOff {
   const _$DayWeatherResponseTearOff();
 
   _DayWeatherResponse call(
-      {@JsonKey(name: 'temp') required Temperature temperature,
+      {required int sunrise,
+      required int sunset,
+      @JsonKey(name: 'temp') required Temperature temperature,
       required List<WeatherResponseDaily> weather,
       @JsonKey(name: 'pop') required double precipitationProbability}) {
     return _DayWeatherResponse(
+      sunrise: sunrise,
+      sunset: sunset,
       temperature: temperature,
       weather: weather,
       precipitationProbability: precipitationProbability,
@@ -394,6 +432,8 @@ const $DayWeatherResponse = _$DayWeatherResponseTearOff();
 
 /// @nodoc
 mixin _$DayWeatherResponse {
+  int get sunrise => throw _privateConstructorUsedError;
+  int get sunset => throw _privateConstructorUsedError;
   @JsonKey(name: 'temp')
   Temperature get temperature => throw _privateConstructorUsedError;
   List<WeatherResponseDaily> get weather => throw _privateConstructorUsedError;
@@ -412,7 +452,9 @@ abstract class $DayWeatherResponseCopyWith<$Res> {
           DayWeatherResponse value, $Res Function(DayWeatherResponse) then) =
       _$DayWeatherResponseCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'temp') Temperature temperature,
+      {int sunrise,
+      int sunset,
+      @JsonKey(name: 'temp') Temperature temperature,
       List<WeatherResponseDaily> weather,
       @JsonKey(name: 'pop') double precipitationProbability});
 
@@ -430,11 +472,21 @@ class _$DayWeatherResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? sunrise = freezed,
+    Object? sunset = freezed,
     Object? temperature = freezed,
     Object? weather = freezed,
     Object? precipitationProbability = freezed,
   }) {
     return _then(_value.copyWith(
+      sunrise: sunrise == freezed
+          ? _value.sunrise
+          : sunrise // ignore: cast_nullable_to_non_nullable
+              as int,
+      sunset: sunset == freezed
+          ? _value.sunset
+          : sunset // ignore: cast_nullable_to_non_nullable
+              as int,
       temperature: temperature == freezed
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
@@ -466,7 +518,9 @@ abstract class _$DayWeatherResponseCopyWith<$Res>
       __$DayWeatherResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'temp') Temperature temperature,
+      {int sunrise,
+      int sunset,
+      @JsonKey(name: 'temp') Temperature temperature,
       List<WeatherResponseDaily> weather,
       @JsonKey(name: 'pop') double precipitationProbability});
 
@@ -487,11 +541,21 @@ class __$DayWeatherResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? sunrise = freezed,
+    Object? sunset = freezed,
     Object? temperature = freezed,
     Object? weather = freezed,
     Object? precipitationProbability = freezed,
   }) {
     return _then(_DayWeatherResponse(
+      sunrise: sunrise == freezed
+          ? _value.sunrise
+          : sunrise // ignore: cast_nullable_to_non_nullable
+              as int,
+      sunset: sunset == freezed
+          ? _value.sunset
+          : sunset // ignore: cast_nullable_to_non_nullable
+              as int,
       temperature: temperature == freezed
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
@@ -514,13 +578,19 @@ class _$_DayWeatherResponse
     with DiagnosticableTreeMixin
     implements _DayWeatherResponse {
   _$_DayWeatherResponse(
-      {@JsonKey(name: 'temp') required this.temperature,
+      {required this.sunrise,
+      required this.sunset,
+      @JsonKey(name: 'temp') required this.temperature,
       required this.weather,
       @JsonKey(name: 'pop') required this.precipitationProbability});
 
   factory _$_DayWeatherResponse.fromJson(Map<String, dynamic> json) =>
       _$$_DayWeatherResponseFromJson(json);
 
+  @override
+  final int sunrise;
+  @override
+  final int sunset;
   @override
   @JsonKey(name: 'temp')
   final Temperature temperature;
@@ -532,7 +602,7 @@ class _$_DayWeatherResponse
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DayWeatherResponse(temperature: $temperature, weather: $weather, precipitationProbability: $precipitationProbability)';
+    return 'DayWeatherResponse(sunrise: $sunrise, sunset: $sunset, temperature: $temperature, weather: $weather, precipitationProbability: $precipitationProbability)';
   }
 
   @override
@@ -540,6 +610,8 @@ class _$_DayWeatherResponse
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'DayWeatherResponse'))
+      ..add(DiagnosticsProperty('sunrise', sunrise))
+      ..add(DiagnosticsProperty('sunset', sunset))
       ..add(DiagnosticsProperty('temperature', temperature))
       ..add(DiagnosticsProperty('weather', weather))
       ..add(DiagnosticsProperty(
@@ -551,6 +623,8 @@ class _$_DayWeatherResponse
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _DayWeatherResponse &&
+            (identical(other.sunrise, sunrise) || other.sunrise == sunrise) &&
+            (identical(other.sunset, sunset) || other.sunset == sunset) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
             const DeepCollectionEquality().equals(other.weather, weather) &&
@@ -560,7 +634,7 @@ class _$_DayWeatherResponse
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, temperature,
+  int get hashCode => Object.hash(runtimeType, sunrise, sunset, temperature,
       const DeepCollectionEquality().hash(weather), precipitationProbability);
 
   @JsonKey(ignore: true)
@@ -576,7 +650,9 @@ class _$_DayWeatherResponse
 
 abstract class _DayWeatherResponse implements DayWeatherResponse {
   factory _DayWeatherResponse(
-          {@JsonKey(name: 'temp') required Temperature temperature,
+          {required int sunrise,
+          required int sunset,
+          @JsonKey(name: 'temp') required Temperature temperature,
           required List<WeatherResponseDaily> weather,
           @JsonKey(name: 'pop') required double precipitationProbability}) =
       _$_DayWeatherResponse;
@@ -584,6 +660,10 @@ abstract class _DayWeatherResponse implements DayWeatherResponse {
   factory _DayWeatherResponse.fromJson(Map<String, dynamic> json) =
       _$_DayWeatherResponse.fromJson;
 
+  @override
+  int get sunrise;
+  @override
+  int get sunset;
   @override
   @JsonKey(name: 'temp')
   Temperature get temperature;
