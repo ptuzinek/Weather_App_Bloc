@@ -16,7 +16,12 @@ class DailyForecast extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
-              child: Text(weekday((date + i) % 7 + 1)),
+              child: Text(
+                weekday((date + i) % 7 + 1),
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             Table(
               columnWidths: {
@@ -65,8 +70,13 @@ class DailyForecast extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8),
                       child: Align(
                         alignment: Alignment.topRight,
-                        child: Text(weather.calculateCelsius(
-                            weather.weatherDailyList[i + 1].dayTemperature)),
+                        child: Text(
+                          weather.calculateCelsius(
+                              weather.weatherDailyList[i + 1].dayTemperature),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
                     ),
                     Padding(
@@ -76,7 +86,10 @@ class DailyForecast extends StatelessWidget {
                         child: Text(
                           weather.calculateCelsius(
                               weather.weatherDailyList[i + 1].nightTemperature),
-                          style: TextStyle(color: Colors.grey[350]),
+                          style: TextStyle(
+                            color: Colors.grey[350],
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
