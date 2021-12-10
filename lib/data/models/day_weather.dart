@@ -11,6 +11,10 @@ class DayWeather with _$DayWeather {
     required double nightTemperature,
     required String weatherIconId,
     required double precipitationProbability,
+    required double minTemperature,
+    required double maxTemperature,
+    required int sunrise,
+    required int sunset,
   }) = _DayWeather;
 
   factory DayWeather.fromJson(Map<String, dynamic> json) =>

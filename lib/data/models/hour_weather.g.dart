@@ -15,6 +15,12 @@ _$_HourWeather _$$_HourWeatherFromJson(Map<String, dynamic> json) =>
       pressure: json['pressure'] as int,
       weatherIconId: json['weatherIconId'] as String,
       weatherDescription: json['weatherDescription'] as String,
+      precipitationProbability:
+          (json['precipitationProbability'] as num).toDouble(),
+      humidity: json['humidity'] as int,
+      feelsLike: (json['feelsLike'] as num).toDouble(),
+      visibility: json['visibility'] as int,
+      uvi: (json['uvi'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$_HourWeatherToJson(_$_HourWeather instance) =>
@@ -26,4 +32,9 @@ Map<String, dynamic> _$$_HourWeatherToJson(_$_HourWeather instance) =>
       'pressure': instance.pressure,
       'weatherIconId': instance.weatherIconId,
       'weatherDescription': instance.weatherDescription,
+      'precipitationProbability': instance.precipitationProbability,
+      'humidity': instance.humidity,
+      'feelsLike': instance.feelsLike,
+      'visibility': instance.visibility,
+      'uvi': instance.uvi,
     };

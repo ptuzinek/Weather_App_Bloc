@@ -20,6 +20,11 @@ const weatherHourlyList = [
     cloudiness: 0,
     pressure: 1019,
     weatherDescription: "few clouds",
+    feelsLike: 280.4,
+    humidity: 68,
+    precipitationProbability: 0,
+    uvi: 1.4,
+    visibility: 306,
   )
 ];
 
@@ -29,6 +34,10 @@ const weatherDailyList = [
     nightTemperature: 275.09,
     precipitationProbability: 0.2,
     weatherIconId: '10d',
+    maxTemperature: 284.07,
+    minTemperature: 275.09,
+    sunrise: 1618282134,
+    sunset: 1618333901,
   )
 ];
 

@@ -35,6 +35,11 @@ class WeatherMapper {
         pressure: hourWeatherResponse.pressure,
         weatherIconId: hourWeatherResponse.weather[0].weatherIconId,
         weatherDescription: hourWeatherResponse.weather[0].description,
+        feelsLike: hourWeatherResponse.feelsLike,
+        humidity: hourWeatherResponse.humidity,
+        precipitationProbability: hourWeatherResponse.precipitationProbability,
+        uvi: hourWeatherResponse.uvi,
+        visibility: hourWeatherResponse.visibility,
       );
 
   static DayWeather _mapDayWeather(DayWeatherResponse dayWeatherResponse) =>
@@ -43,5 +48,9 @@ class WeatherMapper {
         nightTemperature: dayWeatherResponse.temperature.night,
         weatherIconId: dayWeatherResponse.weather[0].weatherIconId,
         precipitationProbability: dayWeatherResponse.precipitationProbability,
+        maxTemperature: dayWeatherResponse.temperature.max,
+        minTemperature: dayWeatherResponse.temperature.min,
+        sunrise: dayWeatherResponse.sunrise,
+        sunset: dayWeatherResponse.sunset,
       );
 }

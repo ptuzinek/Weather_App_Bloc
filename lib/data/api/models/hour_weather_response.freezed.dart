@@ -239,18 +239,26 @@ class _$HourWeatherResponseTearOff {
   _HourWeatherResponse call(
       {@JsonKey(name: 'dt') required int timeStamp,
       @JsonKey(name: 'temp') required double temperature,
-      required int pressure,
       @JsonKey(name: 'clouds') required int cloudiness,
-      required int visibility,
+      @JsonKey(name: 'pop') required double precipitationProbability,
+      required int humidity,
       @JsonKey(name: 'wind_speed') required double windSpeed,
+      @JsonKey(name: 'feels_like') required double feelsLike,
+      required int pressure,
+      required int visibility,
+      required double uvi,
       required List<WeatherResponse> weather}) {
     return _HourWeatherResponse(
       timeStamp: timeStamp,
       temperature: temperature,
-      pressure: pressure,
       cloudiness: cloudiness,
-      visibility: visibility,
+      precipitationProbability: precipitationProbability,
+      humidity: humidity,
       windSpeed: windSpeed,
+      feelsLike: feelsLike,
+      pressure: pressure,
+      visibility: visibility,
+      uvi: uvi,
       weather: weather,
     );
   }
@@ -269,12 +277,18 @@ mixin _$HourWeatherResponse {
   int get timeStamp => throw _privateConstructorUsedError;
   @JsonKey(name: 'temp')
   double get temperature => throw _privateConstructorUsedError;
-  int get pressure => throw _privateConstructorUsedError;
   @JsonKey(name: 'clouds')
   int get cloudiness => throw _privateConstructorUsedError;
-  int get visibility => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pop')
+  double get precipitationProbability => throw _privateConstructorUsedError;
+  int get humidity => throw _privateConstructorUsedError;
   @JsonKey(name: 'wind_speed')
   double get windSpeed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feels_like')
+  double get feelsLike => throw _privateConstructorUsedError;
+  int get pressure => throw _privateConstructorUsedError;
+  int get visibility => throw _privateConstructorUsedError;
+  double get uvi => throw _privateConstructorUsedError;
   List<WeatherResponse> get weather => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -291,10 +305,14 @@ abstract class $HourWeatherResponseCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'dt') int timeStamp,
       @JsonKey(name: 'temp') double temperature,
-      int pressure,
       @JsonKey(name: 'clouds') int cloudiness,
-      int visibility,
+      @JsonKey(name: 'pop') double precipitationProbability,
+      int humidity,
       @JsonKey(name: 'wind_speed') double windSpeed,
+      @JsonKey(name: 'feels_like') double feelsLike,
+      int pressure,
+      int visibility,
+      double uvi,
       List<WeatherResponse> weather});
 }
 
@@ -311,10 +329,14 @@ class _$HourWeatherResponseCopyWithImpl<$Res>
   $Res call({
     Object? timeStamp = freezed,
     Object? temperature = freezed,
-    Object? pressure = freezed,
     Object? cloudiness = freezed,
-    Object? visibility = freezed,
+    Object? precipitationProbability = freezed,
+    Object? humidity = freezed,
     Object? windSpeed = freezed,
+    Object? feelsLike = freezed,
+    Object? pressure = freezed,
+    Object? visibility = freezed,
+    Object? uvi = freezed,
     Object? weather = freezed,
   }) {
     return _then(_value.copyWith(
@@ -326,21 +348,37 @@ class _$HourWeatherResponseCopyWithImpl<$Res>
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
               as double,
-      pressure: pressure == freezed
-          ? _value.pressure
-          : pressure // ignore: cast_nullable_to_non_nullable
-              as int,
       cloudiness: cloudiness == freezed
           ? _value.cloudiness
           : cloudiness // ignore: cast_nullable_to_non_nullable
+              as int,
+      precipitationProbability: precipitationProbability == freezed
+          ? _value.precipitationProbability
+          : precipitationProbability // ignore: cast_nullable_to_non_nullable
+              as double,
+      humidity: humidity == freezed
+          ? _value.humidity
+          : humidity // ignore: cast_nullable_to_non_nullable
+              as int,
+      windSpeed: windSpeed == freezed
+          ? _value.windSpeed
+          : windSpeed // ignore: cast_nullable_to_non_nullable
+              as double,
+      feelsLike: feelsLike == freezed
+          ? _value.feelsLike
+          : feelsLike // ignore: cast_nullable_to_non_nullable
+              as double,
+      pressure: pressure == freezed
+          ? _value.pressure
+          : pressure // ignore: cast_nullable_to_non_nullable
               as int,
       visibility: visibility == freezed
           ? _value.visibility
           : visibility // ignore: cast_nullable_to_non_nullable
               as int,
-      windSpeed: windSpeed == freezed
-          ? _value.windSpeed
-          : windSpeed // ignore: cast_nullable_to_non_nullable
+      uvi: uvi == freezed
+          ? _value.uvi
+          : uvi // ignore: cast_nullable_to_non_nullable
               as double,
       weather: weather == freezed
           ? _value.weather
@@ -360,10 +398,14 @@ abstract class _$HourWeatherResponseCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'dt') int timeStamp,
       @JsonKey(name: 'temp') double temperature,
-      int pressure,
       @JsonKey(name: 'clouds') int cloudiness,
-      int visibility,
+      @JsonKey(name: 'pop') double precipitationProbability,
+      int humidity,
       @JsonKey(name: 'wind_speed') double windSpeed,
+      @JsonKey(name: 'feels_like') double feelsLike,
+      int pressure,
+      int visibility,
+      double uvi,
       List<WeatherResponse> weather});
 }
 
@@ -382,10 +424,14 @@ class __$HourWeatherResponseCopyWithImpl<$Res>
   $Res call({
     Object? timeStamp = freezed,
     Object? temperature = freezed,
-    Object? pressure = freezed,
     Object? cloudiness = freezed,
-    Object? visibility = freezed,
+    Object? precipitationProbability = freezed,
+    Object? humidity = freezed,
     Object? windSpeed = freezed,
+    Object? feelsLike = freezed,
+    Object? pressure = freezed,
+    Object? visibility = freezed,
+    Object? uvi = freezed,
     Object? weather = freezed,
   }) {
     return _then(_HourWeatherResponse(
@@ -397,21 +443,37 @@ class __$HourWeatherResponseCopyWithImpl<$Res>
           ? _value.temperature
           : temperature // ignore: cast_nullable_to_non_nullable
               as double,
-      pressure: pressure == freezed
-          ? _value.pressure
-          : pressure // ignore: cast_nullable_to_non_nullable
-              as int,
       cloudiness: cloudiness == freezed
           ? _value.cloudiness
           : cloudiness // ignore: cast_nullable_to_non_nullable
+              as int,
+      precipitationProbability: precipitationProbability == freezed
+          ? _value.precipitationProbability
+          : precipitationProbability // ignore: cast_nullable_to_non_nullable
+              as double,
+      humidity: humidity == freezed
+          ? _value.humidity
+          : humidity // ignore: cast_nullable_to_non_nullable
+              as int,
+      windSpeed: windSpeed == freezed
+          ? _value.windSpeed
+          : windSpeed // ignore: cast_nullable_to_non_nullable
+              as double,
+      feelsLike: feelsLike == freezed
+          ? _value.feelsLike
+          : feelsLike // ignore: cast_nullable_to_non_nullable
+              as double,
+      pressure: pressure == freezed
+          ? _value.pressure
+          : pressure // ignore: cast_nullable_to_non_nullable
               as int,
       visibility: visibility == freezed
           ? _value.visibility
           : visibility // ignore: cast_nullable_to_non_nullable
               as int,
-      windSpeed: windSpeed == freezed
-          ? _value.windSpeed
-          : windSpeed // ignore: cast_nullable_to_non_nullable
+      uvi: uvi == freezed
+          ? _value.uvi
+          : uvi // ignore: cast_nullable_to_non_nullable
               as double,
       weather: weather == freezed
           ? _value.weather
@@ -429,10 +491,14 @@ class _$_HourWeatherResponse
   _$_HourWeatherResponse(
       {@JsonKey(name: 'dt') required this.timeStamp,
       @JsonKey(name: 'temp') required this.temperature,
-      required this.pressure,
       @JsonKey(name: 'clouds') required this.cloudiness,
-      required this.visibility,
+      @JsonKey(name: 'pop') required this.precipitationProbability,
+      required this.humidity,
       @JsonKey(name: 'wind_speed') required this.windSpeed,
+      @JsonKey(name: 'feels_like') required this.feelsLike,
+      required this.pressure,
+      required this.visibility,
+      required this.uvi,
       required this.weather});
 
   factory _$_HourWeatherResponse.fromJson(Map<String, dynamic> json) =>
@@ -445,21 +511,31 @@ class _$_HourWeatherResponse
   @JsonKey(name: 'temp')
   final double temperature;
   @override
-  final int pressure;
-  @override
   @JsonKey(name: 'clouds')
   final int cloudiness;
   @override
-  final int visibility;
+  @JsonKey(name: 'pop')
+  final double precipitationProbability;
+  @override
+  final int humidity;
   @override
   @JsonKey(name: 'wind_speed')
   final double windSpeed;
+  @override
+  @JsonKey(name: 'feels_like')
+  final double feelsLike;
+  @override
+  final int pressure;
+  @override
+  final int visibility;
+  @override
+  final double uvi;
   @override
   final List<WeatherResponse> weather;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HourWeatherResponse(timeStamp: $timeStamp, temperature: $temperature, pressure: $pressure, cloudiness: $cloudiness, visibility: $visibility, windSpeed: $windSpeed, weather: $weather)';
+    return 'HourWeatherResponse(timeStamp: $timeStamp, temperature: $temperature, cloudiness: $cloudiness, precipitationProbability: $precipitationProbability, humidity: $humidity, windSpeed: $windSpeed, feelsLike: $feelsLike, pressure: $pressure, visibility: $visibility, uvi: $uvi, weather: $weather)';
   }
 
   @override
@@ -469,10 +545,15 @@ class _$_HourWeatherResponse
       ..add(DiagnosticsProperty('type', 'HourWeatherResponse'))
       ..add(DiagnosticsProperty('timeStamp', timeStamp))
       ..add(DiagnosticsProperty('temperature', temperature))
-      ..add(DiagnosticsProperty('pressure', pressure))
       ..add(DiagnosticsProperty('cloudiness', cloudiness))
-      ..add(DiagnosticsProperty('visibility', visibility))
+      ..add(DiagnosticsProperty(
+          'precipitationProbability', precipitationProbability))
+      ..add(DiagnosticsProperty('humidity', humidity))
       ..add(DiagnosticsProperty('windSpeed', windSpeed))
+      ..add(DiagnosticsProperty('feelsLike', feelsLike))
+      ..add(DiagnosticsProperty('pressure', pressure))
+      ..add(DiagnosticsProperty('visibility', visibility))
+      ..add(DiagnosticsProperty('uvi', uvi))
       ..add(DiagnosticsProperty('weather', weather));
   }
 
@@ -485,14 +566,22 @@ class _$_HourWeatherResponse
                 other.timeStamp == timeStamp) &&
             (identical(other.temperature, temperature) ||
                 other.temperature == temperature) &&
-            (identical(other.pressure, pressure) ||
-                other.pressure == pressure) &&
             (identical(other.cloudiness, cloudiness) ||
                 other.cloudiness == cloudiness) &&
-            (identical(other.visibility, visibility) ||
-                other.visibility == visibility) &&
+            (identical(
+                    other.precipitationProbability, precipitationProbability) ||
+                other.precipitationProbability == precipitationProbability) &&
+            (identical(other.humidity, humidity) ||
+                other.humidity == humidity) &&
             (identical(other.windSpeed, windSpeed) ||
                 other.windSpeed == windSpeed) &&
+            (identical(other.feelsLike, feelsLike) ||
+                other.feelsLike == feelsLike) &&
+            (identical(other.pressure, pressure) ||
+                other.pressure == pressure) &&
+            (identical(other.visibility, visibility) ||
+                other.visibility == visibility) &&
+            (identical(other.uvi, uvi) || other.uvi == uvi) &&
             const DeepCollectionEquality().equals(other.weather, weather));
   }
 
@@ -501,10 +590,14 @@ class _$_HourWeatherResponse
       runtimeType,
       timeStamp,
       temperature,
-      pressure,
       cloudiness,
-      visibility,
+      precipitationProbability,
+      humidity,
       windSpeed,
+      feelsLike,
+      pressure,
+      visibility,
+      uvi,
       const DeepCollectionEquality().hash(weather));
 
   @JsonKey(ignore: true)
@@ -523,10 +616,14 @@ abstract class _HourWeatherResponse implements HourWeatherResponse {
   factory _HourWeatherResponse(
       {@JsonKey(name: 'dt') required int timeStamp,
       @JsonKey(name: 'temp') required double temperature,
-      required int pressure,
       @JsonKey(name: 'clouds') required int cloudiness,
-      required int visibility,
+      @JsonKey(name: 'pop') required double precipitationProbability,
+      required int humidity,
       @JsonKey(name: 'wind_speed') required double windSpeed,
+      @JsonKey(name: 'feels_like') required double feelsLike,
+      required int pressure,
+      required int visibility,
+      required double uvi,
       required List<WeatherResponse> weather}) = _$_HourWeatherResponse;
 
   factory _HourWeatherResponse.fromJson(Map<String, dynamic> json) =
@@ -539,15 +636,25 @@ abstract class _HourWeatherResponse implements HourWeatherResponse {
   @JsonKey(name: 'temp')
   double get temperature;
   @override
-  int get pressure;
-  @override
   @JsonKey(name: 'clouds')
   int get cloudiness;
   @override
-  int get visibility;
+  @JsonKey(name: 'pop')
+  double get precipitationProbability;
+  @override
+  int get humidity;
   @override
   @JsonKey(name: 'wind_speed')
   double get windSpeed;
+  @override
+  @JsonKey(name: 'feels_like')
+  double get feelsLike;
+  @override
+  int get pressure;
+  @override
+  int get visibility;
+  @override
+  double get uvi;
   @override
   List<WeatherResponse> get weather;
   @override

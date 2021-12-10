@@ -28,7 +28,12 @@ class _$HourWeatherTearOff {
       required int cloudiness,
       required int pressure,
       required String weatherIconId,
-      required String weatherDescription}) {
+      required String weatherDescription,
+      required double precipitationProbability,
+      required int humidity,
+      required double feelsLike,
+      required int visibility,
+      required double uvi}) {
     return _HourWeather(
       timeStamp: timeStamp,
       temperature: temperature,
@@ -37,6 +42,11 @@ class _$HourWeatherTearOff {
       pressure: pressure,
       weatherIconId: weatherIconId,
       weatherDescription: weatherDescription,
+      precipitationProbability: precipitationProbability,
+      humidity: humidity,
+      feelsLike: feelsLike,
+      visibility: visibility,
+      uvi: uvi,
     );
   }
 
@@ -57,6 +67,11 @@ mixin _$HourWeather {
   int get pressure => throw _privateConstructorUsedError;
   String get weatherIconId => throw _privateConstructorUsedError;
   String get weatherDescription => throw _privateConstructorUsedError;
+  double get precipitationProbability => throw _privateConstructorUsedError;
+  int get humidity => throw _privateConstructorUsedError;
+  double get feelsLike => throw _privateConstructorUsedError;
+  int get visibility => throw _privateConstructorUsedError;
+  double get uvi => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -76,7 +91,12 @@ abstract class $HourWeatherCopyWith<$Res> {
       int cloudiness,
       int pressure,
       String weatherIconId,
-      String weatherDescription});
+      String weatherDescription,
+      double precipitationProbability,
+      int humidity,
+      double feelsLike,
+      int visibility,
+      double uvi});
 }
 
 /// @nodoc
@@ -96,6 +116,11 @@ class _$HourWeatherCopyWithImpl<$Res> implements $HourWeatherCopyWith<$Res> {
     Object? pressure = freezed,
     Object? weatherIconId = freezed,
     Object? weatherDescription = freezed,
+    Object? precipitationProbability = freezed,
+    Object? humidity = freezed,
+    Object? feelsLike = freezed,
+    Object? visibility = freezed,
+    Object? uvi = freezed,
   }) {
     return _then(_value.copyWith(
       timeStamp: timeStamp == freezed
@@ -126,6 +151,26 @@ class _$HourWeatherCopyWithImpl<$Res> implements $HourWeatherCopyWith<$Res> {
           ? _value.weatherDescription
           : weatherDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      precipitationProbability: precipitationProbability == freezed
+          ? _value.precipitationProbability
+          : precipitationProbability // ignore: cast_nullable_to_non_nullable
+              as double,
+      humidity: humidity == freezed
+          ? _value.humidity
+          : humidity // ignore: cast_nullable_to_non_nullable
+              as int,
+      feelsLike: feelsLike == freezed
+          ? _value.feelsLike
+          : feelsLike // ignore: cast_nullable_to_non_nullable
+              as double,
+      visibility: visibility == freezed
+          ? _value.visibility
+          : visibility // ignore: cast_nullable_to_non_nullable
+              as int,
+      uvi: uvi == freezed
+          ? _value.uvi
+          : uvi // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -144,7 +189,12 @@ abstract class _$HourWeatherCopyWith<$Res>
       int cloudiness,
       int pressure,
       String weatherIconId,
-      String weatherDescription});
+      String weatherDescription,
+      double precipitationProbability,
+      int humidity,
+      double feelsLike,
+      int visibility,
+      double uvi});
 }
 
 /// @nodoc
@@ -166,6 +216,11 @@ class __$HourWeatherCopyWithImpl<$Res> extends _$HourWeatherCopyWithImpl<$Res>
     Object? pressure = freezed,
     Object? weatherIconId = freezed,
     Object? weatherDescription = freezed,
+    Object? precipitationProbability = freezed,
+    Object? humidity = freezed,
+    Object? feelsLike = freezed,
+    Object? visibility = freezed,
+    Object? uvi = freezed,
   }) {
     return _then(_HourWeather(
       timeStamp: timeStamp == freezed
@@ -196,6 +251,26 @@ class __$HourWeatherCopyWithImpl<$Res> extends _$HourWeatherCopyWithImpl<$Res>
           ? _value.weatherDescription
           : weatherDescription // ignore: cast_nullable_to_non_nullable
               as String,
+      precipitationProbability: precipitationProbability == freezed
+          ? _value.precipitationProbability
+          : precipitationProbability // ignore: cast_nullable_to_non_nullable
+              as double,
+      humidity: humidity == freezed
+          ? _value.humidity
+          : humidity // ignore: cast_nullable_to_non_nullable
+              as int,
+      feelsLike: feelsLike == freezed
+          ? _value.feelsLike
+          : feelsLike // ignore: cast_nullable_to_non_nullable
+              as double,
+      visibility: visibility == freezed
+          ? _value.visibility
+          : visibility // ignore: cast_nullable_to_non_nullable
+              as int,
+      uvi: uvi == freezed
+          ? _value.uvi
+          : uvi // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -210,7 +285,12 @@ class _$_HourWeather with DiagnosticableTreeMixin implements _HourWeather {
       required this.cloudiness,
       required this.pressure,
       required this.weatherIconId,
-      required this.weatherDescription});
+      required this.weatherDescription,
+      required this.precipitationProbability,
+      required this.humidity,
+      required this.feelsLike,
+      required this.visibility,
+      required this.uvi});
 
   factory _$_HourWeather.fromJson(Map<String, dynamic> json) =>
       _$$_HourWeatherFromJson(json);
@@ -229,10 +309,20 @@ class _$_HourWeather with DiagnosticableTreeMixin implements _HourWeather {
   final String weatherIconId;
   @override
   final String weatherDescription;
+  @override
+  final double precipitationProbability;
+  @override
+  final int humidity;
+  @override
+  final double feelsLike;
+  @override
+  final int visibility;
+  @override
+  final double uvi;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HourWeather(timeStamp: $timeStamp, temperature: $temperature, windSpeed: $windSpeed, cloudiness: $cloudiness, pressure: $pressure, weatherIconId: $weatherIconId, weatherDescription: $weatherDescription)';
+    return 'HourWeather(timeStamp: $timeStamp, temperature: $temperature, windSpeed: $windSpeed, cloudiness: $cloudiness, pressure: $pressure, weatherIconId: $weatherIconId, weatherDescription: $weatherDescription, precipitationProbability: $precipitationProbability, humidity: $humidity, feelsLike: $feelsLike, visibility: $visibility, uvi: $uvi)';
   }
 
   @override
@@ -246,7 +336,13 @@ class _$_HourWeather with DiagnosticableTreeMixin implements _HourWeather {
       ..add(DiagnosticsProperty('cloudiness', cloudiness))
       ..add(DiagnosticsProperty('pressure', pressure))
       ..add(DiagnosticsProperty('weatherIconId', weatherIconId))
-      ..add(DiagnosticsProperty('weatherDescription', weatherDescription));
+      ..add(DiagnosticsProperty('weatherDescription', weatherDescription))
+      ..add(DiagnosticsProperty(
+          'precipitationProbability', precipitationProbability))
+      ..add(DiagnosticsProperty('humidity', humidity))
+      ..add(DiagnosticsProperty('feelsLike', feelsLike))
+      ..add(DiagnosticsProperty('visibility', visibility))
+      ..add(DiagnosticsProperty('uvi', uvi));
   }
 
   @override
@@ -267,12 +363,34 @@ class _$_HourWeather with DiagnosticableTreeMixin implements _HourWeather {
             (identical(other.weatherIconId, weatherIconId) ||
                 other.weatherIconId == weatherIconId) &&
             (identical(other.weatherDescription, weatherDescription) ||
-                other.weatherDescription == weatherDescription));
+                other.weatherDescription == weatherDescription) &&
+            (identical(
+                    other.precipitationProbability, precipitationProbability) ||
+                other.precipitationProbability == precipitationProbability) &&
+            (identical(other.humidity, humidity) ||
+                other.humidity == humidity) &&
+            (identical(other.feelsLike, feelsLike) ||
+                other.feelsLike == feelsLike) &&
+            (identical(other.visibility, visibility) ||
+                other.visibility == visibility) &&
+            (identical(other.uvi, uvi) || other.uvi == uvi));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, timeStamp, temperature,
-      windSpeed, cloudiness, pressure, weatherIconId, weatherDescription);
+  int get hashCode => Object.hash(
+      runtimeType,
+      timeStamp,
+      temperature,
+      windSpeed,
+      cloudiness,
+      pressure,
+      weatherIconId,
+      weatherDescription,
+      precipitationProbability,
+      humidity,
+      feelsLike,
+      visibility,
+      uvi);
 
   @JsonKey(ignore: true)
   @override
@@ -293,7 +411,12 @@ abstract class _HourWeather implements HourWeather {
       required int cloudiness,
       required int pressure,
       required String weatherIconId,
-      required String weatherDescription}) = _$_HourWeather;
+      required String weatherDescription,
+      required double precipitationProbability,
+      required int humidity,
+      required double feelsLike,
+      required int visibility,
+      required double uvi}) = _$_HourWeather;
 
   factory _HourWeather.fromJson(Map<String, dynamic> json) =
       _$_HourWeather.fromJson;
@@ -312,6 +435,16 @@ abstract class _HourWeather implements HourWeather {
   String get weatherIconId;
   @override
   String get weatherDescription;
+  @override
+  double get precipitationProbability;
+  @override
+  int get humidity;
+  @override
+  double get feelsLike;
+  @override
+  int get visibility;
+  @override
+  double get uvi;
   @override
   @JsonKey(ignore: true)
   _$HourWeatherCopyWith<_HourWeather> get copyWith =>

@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app_bloc/business_logic/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_app_bloc/business_logic/cubits/favorite_cities_cubit/favorite_cities_cubit.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
+import 'package:weather_app_bloc/presentation/widgets/current_weather_info.dart';
 import 'package:weather_app_bloc/presentation/widgets/daily_forecast.dart';
+import 'package:weather_app_bloc/presentation/widgets/horizontal_line.dart';
 import 'package:weather_app_bloc/presentation/widgets/slider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -191,39 +193,14 @@ class WeatherContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentWeather = weather.weatherHourlyList[0];
     return SliverList(
         delegate: SliverChildListDelegate.fixed([
       WeatherSlider(weather: weather),
       DailyForecast(weather: weather),
       //TODO - Implement Current Weather info UI
-      SizedBox(
-        height: 100,
-      ),
-      Center(child: Text('Weather in ${weather.cityName}')),
-      SizedBox(
-        height: 200,
-      ),
-      Center(
-        child: Text(
-            'Temperature: ${weather.calculateCelsius(currentWeather.temperature)} °C'),
-      ),
-      SizedBox(
-        height: 200,
-      ),
-      Center(child: Text('Cloudiness: ${currentWeather.cloudiness} %')),
-      SizedBox(
-        height: 200,
-      ),
-      Center(child: Text('Pressure: ${currentWeather.pressure} hPa')),
-      SizedBox(
-        height: 200,
-      ),
-      Center(child: Text('Wind Speed: ${currentWeather.windSpeed} m/s')),
-      SizedBox(
-        height: 200,
-      ),
-      Center(child: Text('Description: ${currentWeather.weatherDescription}')),
+      HorizontalLine(),
+      CurrentWeatherInfo(weather: weather),
+      HorizontalLine(),
     ]));
   }
 }
