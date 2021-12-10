@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app_bloc/data/models/day_weather.dart';
 import 'package:weather_app_bloc/data/models/weather.dart';
 import 'package:weather_app_bloc/presentation/widgets/horizontal_line.dart';
 
